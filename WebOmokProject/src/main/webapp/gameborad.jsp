@@ -1,6 +1,25 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+	    function placeStone(row, col) {
+	        $.ajax({
+	            type: "POST",
+	            url: "gamelogic",
+	            data: {
+	                action: "Stone",
+	                row: row,
+	                col: col,
+	                player : player1
+	            },
+	            dataType: "ajax",
+	            success: function(response) {
+	                // 돌을 오목판에 배치하는 로직임
+	            }
+	        });
+	    }
+    </script>
     <style>
         body {
             margin: 0;
@@ -22,7 +41,7 @@
             width: 400px;
             height: 400px;
             border: 2px solid #000;
-            background-image: url('/images/Blank_Go_board.png'); /* 바둑판 이미지 경로 지정 */
+            background-image: url('/images/Blank_Go_board.png'); 
             background-size: cover;
         }
         .omok-cell {
