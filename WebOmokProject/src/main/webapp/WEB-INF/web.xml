@@ -9,4 +9,15 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+ 	 <!-- 서블릿 등록 -->
+  <servlet>
+  	<servlet-name>Playlogic</servlet-name>
+  	<servlet-class>Game.Playlogic</servlet-class>
+  </servlet>
+  <!-- 서블릿 매핑 -->
+  <servlet-mapping>
+  <servlet-name>Playlogic</servlet-name>
+  <url-pattern>/play</url-pattern>
+  </servlet-mapping>
 </web-app>
