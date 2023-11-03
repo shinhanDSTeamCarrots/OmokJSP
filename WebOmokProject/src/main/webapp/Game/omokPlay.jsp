@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<title>오목 게임</title>
     <style>
         body {
             margin: 0;
@@ -59,7 +62,6 @@
             padding: 10px;
         }
     </style>
-    <title>오목 게임</title>
 </head>
 <body>
     <div class="game-container">
@@ -73,7 +75,7 @@
             </div>
         </div>
         <div class="omok-board">
-            
+            <%@ include file="/Game/omokBoard.jsp"  %>
         </div>
         <div class="player-info2">
             <h2>플레이어 2</h2>
