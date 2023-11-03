@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>오목 게임</title>
-<link rel="stylesheet" type="text/css" href="/Game/GameBoardStyle.css">
+<link rel="stylesheet" type="text/css" href="../Game/GameBoardStyle.css">
 </head>
 <body>
     <div class="game-container">
