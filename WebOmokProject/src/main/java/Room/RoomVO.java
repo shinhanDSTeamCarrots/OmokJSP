@@ -1,7 +1,9 @@
 package Room;
 
 import java.sql.Date;
+import lombok.Data;
 
+@Data
 public class RoomVO {
 	
 	private int room_id;

@@ -1,7 +1,9 @@
 package Rank;
 
 import java.sql.Date;
+import lombok.Data;
 
+@Data
 public class LogVO {
 	
 	private int log_id;
