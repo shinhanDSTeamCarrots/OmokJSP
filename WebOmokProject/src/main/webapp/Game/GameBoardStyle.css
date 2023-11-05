@@ -10,24 +10,24 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
 }
-.game-container {
+.game_container {
     display: flex;
 }
-.omok-board {
+.omok_board {
     width: 550px;
     height: 550px;
     border: 2px solid #000;
     background-color: burlywood;
     background-size: cover;
 }
-.omok-cell {
+.omok_cell {
     border: 1px solid #000;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.player-info1 {
+.player_info1 {
     border: 1px solid #000;
     background-color: burlywood;
     margin-top: 270px;
@@ -38,7 +38,7 @@ body {
     width: 200px;
     text-align: center;
 }
-.player-info2 {
+.player_info2 {
     border: 1px solid #000;
     background-color: burlywood;
     margin-left: 60px;
@@ -48,7 +48,7 @@ body {
     width: 200px;
     text-align: center;
 }
-.score-box {
+.score_box {
     border: 1px solid #000;
     background-color: #eee;
     margin: 10px;

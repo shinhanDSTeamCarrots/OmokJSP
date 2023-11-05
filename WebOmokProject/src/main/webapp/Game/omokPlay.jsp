@@ -8,23 +8,23 @@
 <link rel="stylesheet" type="text/css" href="../Game/GameBoardStyle.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="player-info1">
+    <div class="game_container">
+        <div class="player_info1">
             <h2>플레이어 1</h2>
             <p>흑돌</p>
-            <div class="score-box">
+            <div class="score_box">
                 <p>승리: 0</p>
                 <p>패배: 0</p>
                 <p>승률: 0</p>
             </div>
         </div>
-        <div class="omok-board">
+        <div class="omok_board">
             <%@ include file="/Game/omokBoard.jsp"  %>
         </div>
-        <div class="player-info2">
+        <div class="player_info2">
             <h2>플레이어 2</h2>
             <p>백돌</p>
-            <div class="score-box">
+            <div class="score_box">
                 <p>승리: 0</p>
                 <p>패배: 0</p>
                 <p>승률: 0</p>
