@@ -6,14 +6,14 @@
 <meta charset="UTF-8">
 <title>오목 플레이 보드</title>
 <style>
-.flex-container {
+.board_line {
 	display: grid;
 	grid-template-columns: repeat(18, 28px);
 	grid-template-rows: repeat(18, 28px);
 	border: solid 1px black;
-    margin : 22px;
+    margin : 24px;
 }
-.flex-item{
+.board_dot{
 	border: solid 1px black;
 }
 .dot{
@@ -27,12 +27,12 @@
 </style>
 </head>
 <body>
-<div class="flex-container">
+<div class="board_line">
 	<%
 	for(int x=0; x<18; x++){
 		for(int y=0; y<18; y++){
 	%>
-			<div class='flex-item'></div>
+			<div class='board_dot'></div>
 			<%
 			if(x%6 == 3 && y%6 == 3){
                 int topValue = 102 + (x * 28);
