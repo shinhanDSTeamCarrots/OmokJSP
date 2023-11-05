@@ -12,8 +12,9 @@
 	var path = "${pageContext.request.contextPath}";
 	var addr = "ws://"+ip+":"+port+"/"+path+"/"+"ChatingServer";
 	var webSocket = new WebSocket(addr);
-	//var chatWindow, chatMessage, chatId;
 	var roomId, opponentId, myId;
+	
+	//var chatWindow, chatMessage, chatId;
 	// 채팅창이 열리면 대화창, 메시지 입력창, 아이디 표시란으로 사용할 DOM 객체 저장
 	// 윈도우가 로드되면 실행할 익명 함수
 	window.onload = function() {
@@ -41,17 +42,27 @@
 		//{1|2|O:B,2,3}
 
 		*/
-		var msg  = new Object();
+		let msg  = new Object();
 		msg.stone = stone;
 		msg.row = rowpos;
 		msg.col = colpos;
-		var msgJson = new Object();
+		let msgJson = new Object();
 		msgJson.roomId = roomId;
 		msgJson.senderId = myId;
 		msgJson.type = "O";
 		msgJson.content = msg;
 		webSocket.send(msgJson);
 		
+	}
+	function sendMessage(str){
+		let msg = str;
+		let msgJson = new Object();
+		msgJson.roomId = roomId;
+		msgJson.senderId = myId;
+		msgJson.type = "C";
+		msgJson.content = msg;
+		webSocket.send(msgJson);
+
 	}
 	function disconnect() { // 함수명 수정
 		webSocket.close();
@@ -110,7 +121,7 @@
 		if(jsontext.type == "O"){
 			//오목데이터
 			//상대가 착수한 오목임
-			//해당 값을 java로 송신시킴
+			//해당 값을 받을 사람에게 보냄
 			
 		}
 		else if (jsontext.type == "S"){
@@ -119,6 +130,7 @@
 		}
 		else if (jsontext.type == "C"){
 			//확장형 채팅 데이터
+			console.log(jsontext.content);
 		}
 		else if (jsontext.type == "I"){
 			//확장 데이터 2

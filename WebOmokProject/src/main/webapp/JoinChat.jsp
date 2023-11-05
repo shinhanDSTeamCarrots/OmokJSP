@@ -9,19 +9,26 @@
 <body>
 	<script>
 		function chatWinOpen() {
-			var id = document.getElementById("chatId");
-			if (id.value == "") {
+			let playerId = document.getElementById("playerId");
+			let roomId = document.getElementById("roomId");
+			if (playerId.value == "") {
 				alert("아이디를 입력 후 채팅창을 열어주세요.");
-				id.focus();
+				playerId.focus();
 				return;
 			}
-			window.open("ChatWindow.jsp?chatId=" + id.value, "",
-					"width=320,height=400");
-			id.value = "";
+			if (roomId.value == "") {
+				alert("방 번호를 입력 후 채팅창을 열어주세요.");
+				roomId.focus();
+				return;
+			}
+			
+			window.open("Test.jsp?playerId=" + playerId.value+"&roomId="+roomId.value, "");
+			playerId.value = "";
 		}
 	</script>
 	<h2>웹소켓 채팅 - 아이디 적용해서 채팅창 띄워주기</h2>
-	아이디: <input type="text" id="chatId" />
+	아이디: <input type="text" id="playerId" />
+	채팅방: <input type="text" id="roomId" value="1"/>
 	<button onclick="chatWinOpen();">채팅 참여</button>
 </body>
 </html>
