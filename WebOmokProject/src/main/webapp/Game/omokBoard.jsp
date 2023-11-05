@@ -8,30 +8,39 @@
 <style>
 .flex-container {
 	display: grid;
-	grid-template-columns: repeat(19, 28px);
-	grid-template-rows: repeat(19, 28px);
-    margin : 9px;
+	grid-template-columns: repeat(18, 28px);
+	grid-template-rows: repeat(18, 28px);
 	border: solid 1px black;
+    margin : 22px;
 }
 .flex-item{
 	border: solid 1px black;
 }
 .dot{
-	width:5px;
-	height:5px;
+	width:10px;
+	height:10px;
 	background-color: black;
 	border-radius: 50%;
 	position: absolute;
+	transform: translate(-50%, -50%);
 }
 </style>
 </head>
 <body>
 <div class="flex-container">
 	<%
-	for(int x=0; x<19; x++){
-		for(int y=0; y<19; y++){
-			out.println("<div class='flex-item'></div>");
-			//out.println("<div class='flex-item'>"+(x+","+y)+"</div>");
+	for(int x=0; x<18; x++){
+		for(int y=0; y<18; y++){
+	%>
+			<div class='flex-item'></div>
+			<%
+			if(x%6 == 3 && y%6 == 3){
+                int topValue = 102 + (x * 28);
+                int leftValue = 468 + (y * 28);
+            %>
+				<div class="dot" style="top: <%=topValue%>px; left: <%=leftValue%>px;"></div>
+	<%
+			}
 		}
 	}
 	%>
