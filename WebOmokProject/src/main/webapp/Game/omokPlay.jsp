@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>오목 게임</title>
 <link rel="stylesheet" type="text/css" href="../Game/GameBoardStyle.css">
+<script>
+function exit(){
+	var is = confirm("정말 그만두시겠습니까?");
+	
+	if(is){
+		location.href="";
+	}
+}
+</script>
 </head>
 <body>
     <div class="game_container">
@@ -34,7 +43,7 @@
 	            </div>
 	        </div>
 	        <div class="exitBtn">
-	        	<button onclick="">X</button>
+	        	<button onclick="exit()">X</button>
 	        </div>
         </div>
     </div>
