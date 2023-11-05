@@ -1,44 +1,68 @@
 package Game;
 
 public class Board {
-	private char[][] grid;
-	public static final int SIZE = 19;
-    public static final char BLACK = 'B';
-    public static final char WHITE = 'W';
-    public char currentPlayer;
+	private String[][] map;
+	private static final int SIZE = 19;
+    public String currentPlayer;
 	
 	 public Board() {
-	        grid = new char[SIZE][SIZE];
-	        for (int i = 0; i < SIZE; i++) {
-	            for (int j = 0; j < SIZE; j++) {
-	                grid[i][j] = '.';
-	            }
-	        }
-	        currentPlayer = BLACK;
+		 String[][] map;
+		 map = new String[SIZE][SIZE];
+		      for (int row = 0; row < SIZE; row++) {
+		          for (int col = 0; col < SIZE; col++) {
+		               map[row][col] = ".";
+		            }
+		        }
 	    }
 	 
-	  public boolean put(int x, int y, char stone) {
-	        if (x >= 0 && x < SIZE && y >= 0 && y < SIZE && grid[x][y] == '.') {
-	            grid[x][y] = stone;
-	            return true;
+	 public String[][] getMap() {
+		    return map;
+		}
+
+	 
+	 public void print() {
+	        for (int row = 0; row < SIZE; row++) {
+	        	System.out.printf("%2s",row);
+	            for (int col = 0; col < SIZE; col++) {
+	            	System.out.print(" "+ map[row][col]);
+	            }
+	            System.out.println();
+	       	 	if(row == SIZE-1) {
+	       	 		System.out.print("   ");
+	       	 		for(int i = 0; i < SIZE; i++) {
+	           	 		System.out.print((char)(i+65));
+	           	 		System.out.print(" ");
+	       	 		}
+	       	 	System.out.println();
+	       	 	}
 	        }
-	        return false;
 	    }
-	  
-	  public void switchPlayer() {         // 플레이어를 바꾸기 위한 메소드이다. 
-		  if(currentPlayer == BLACK) {	   // Black 이면 White. White 이면 Black으로 바꿈
-			  currentPlayer = WHITE;
-		  } else {
-			  currentPlayer = BLACK;
-		  }
-	  }
-	  
-	  public void getCurrentPlayer() {		// 현재 플레이어를 리턴시
-		
-	  }
-	  
-	  public boolean who(String b, String w) {
+	 
+	 public boolean play(int x, int y, String stone) {
+		    // 이미 돌이 놓인 자리인지, 좌표가 범위 내인지 검사
+		    if (x >= 0 && x < SIZE && y >= 0 && y < SIZE && map[x][y].equals(".")) {
+		        map[x][y] = stone; // "B" 또는 "W"를 보드에 놓음
+		        return true;
+		    }
+		    return false;
+		}
+
+	 
+	 public String isBlackTurn(String currentBlackPlayer, String currentWhitePlayer) {
 		  
-		  return true;
-	  }
+		    if (currentBlackPlayer.equals("black_player")) {
+		        // '흑' 턴으로 변경
+		    	this.currentPlayer = currentBlackPlayer;
+		        return "black_player";
+		    } else {
+		        // '백' 턴으로 변경
+		    	this.currentPlayer = currentWhitePlayer;
+		        return "white_player";
+		}
+	 }
+	 
+	
+	
+
+	 
 }
