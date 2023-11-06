@@ -17,8 +17,8 @@ public class RoomDAO {
 	private DataSource dataFactory;
 	private Statement stmt;
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
-    private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String user = "CARROT";
+   	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    	private static final String user = "CARROT";
     
 	
 	
@@ -26,15 +26,15 @@ public class RoomDAO {
 	private void connDB() {
 		try {
 			Class.forName(driver);
-			System.out.println("Oracle 靛扼捞滚 肺爹 己傍");
+			System.out.println("Oracle 霌滊澕鞚措矂 搿滊敥 靹标车");
 			con = DriverManager.getConnection(url);
-            System.out.println("Connection 积己 己傍");
+            System.out.println("Connection 靸濎劚 靹标车");
             stmt = con.createStatement();
 			
 			}
 		catch(Exception e){
 			e.printStackTrace();
-						}
+				}
 	}
 	public List<RoomVO> listRoom(){
 		List <RoomVO> roomList = new ArrayList<RoomVO>();
@@ -75,14 +75,13 @@ public class RoomDAO {
 				String owner_id = r.getOwner_id();
 				String joinplayer_id = r.getJoinplayer_id();
 				String room_pw = r.getRoom_pw();
-				String query = "INSERT INTO ROOM_TB(room_id, owner_id, joinplayer_id, room_pw"
+				String query = "INSERT INTO ROOM_TB(owner_id, joinplayer_id, room_pw"
 						+ "VALUES(?, ?, ?, ?)";
 				System.out.println(query);
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, room_id);
-				pstmt.setString(2, owner_id);
-				pstmt.setString(3, joinplayer_id);
-				pstmt.setString(4, room_pw);
+				pstmt.setString(1, owner_id);
+				pstmt.setString(2, joinplayer_id);
+				pstmt.setString(3, room_pw);
 				pstmt.executeUpdate();
 				pstmt.close();
 				con.close();		
@@ -98,11 +97,16 @@ public class RoomDAO {
 				System.out.println(query);
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, room_id);
+				pstmt.setString(2, owner_id);
+				pstmt.settString(3, joinplayer_id);
+				pstmt.setString(4, room_nm);
+				pstmt.setDate(5, created_date);
+				pstmt.setString(6, room_pw);
 				pstmt.executeUpdate();
 				} 
 			catch(Exception e) {
 				e.printStackTrace();
-								}
+					}
 			
 		}
 				
