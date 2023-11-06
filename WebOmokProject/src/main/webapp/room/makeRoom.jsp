@@ -4,17 +4,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>방 생성</title>
+    <title>새 방 만들기</title>
 </head>
 <body>
-    <h1>방 생성</h1>
+    <h1>새 방 만들기</h1>
     
     <!-- 방 생성 폼 -->
     <form id="createRoomForm">
         <label for="roomName">방 이름:</label>
+        <input type="hidden" id="creatorId" name="creatorId">
         <input type="text" id="roomName" name="roomName" required>
         <br><br>
-        <input type="submit" value="방 생성하기">
+        <input type="submit" value="방 만들기">
+        <input type="button" value="취소" onclick="javascript:self.close();">
     </form>
 
     <!-- JavaScript 코드 -->
@@ -31,17 +33,18 @@
         document.getElementById("createRoomForm").addEventListener("submit", function(event) {
             event.preventDefault(); // 폼 제출 기본 동작 방지
 
-            var roomName = document.getElementById("roomName").value;
-            var creatorID = document.getElementById("creatorID").textContent;
+            //var roomName = document.getElementById("roomName").value;
+            //var creatorID = document.getElementById("creatorID").textContent;
 
             // 새로운 방을 생성하고 방 목록에 추가합니다
-            window.opener.addRoomToList(creatorID, roomName);
-
+          	//window.opener.addRoomToList(creatorID, roomName);
             // 팝업 창 닫기
             window.close();
             
             window.opener.location.reload();
         });
+        
+        
     </script>
 </body>
 </html>
