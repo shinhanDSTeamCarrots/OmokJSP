@@ -61,21 +61,26 @@ public class MemberDAO {
 		}
 	}
 	
-	//사용자 존재 여부 확인
-	public boolean isExisted(MemberVO memberVO) {
-		boolean result = false;
+	//사용자 존재 여부 확인 및 확인되면 사용자 정보 result에 저장
+	public MemberVO isExisted(MemberVO memberVO) {
+		MemberVO result = null;
 
 		try {
 			con = dataFactory.getConnection();
-			String query = "SELECT DECODE(count(*),1,'true','false') AS result FROM MEMBER_TB WHERE id=? AND pwd=?";
+			String query = "SELECT * FROM MEMBER_TB WHERE id=? AND pwd=?";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPwd());
 			ResultSet rs = pstmt.executeQuery();
-			rs.next();
 			
-			result = Boolean.parseBoolean(rs.getString("result")); //문자열을 불리언으로 변환하는 정적 메서드
+			if (rs.next()) {
+				result = new MemberVO();
+				result.setId(rs.getString(""));
+				result.setName(rs.getString(""));
+				result.setJoindate(rs.getDate(""));
+				result.setEmail(rs.getString(""));			
+			}
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
