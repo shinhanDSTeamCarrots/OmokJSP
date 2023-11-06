@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>오목 플레이 보드</title>
 <style>
-.board_line {
+#board_line {
 	display: grid;
 	width: 504px;
     height: 504px;
@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-<div class="board_line">
+<div id="board_line">
 <c:forEach var="x" begin="0" end="17"> <!-- for(int x=0; x<18; x++)와 동일 -->
 	<c:forEach var="y" begin="0" end="17">
 		<div class='board_dot'></div>
@@ -45,6 +45,10 @@
 	</c:forEach>
 </c:forEach>
 </div>
-</body>
+<script type="text/javascript">
+document.getElementById('board_line').addEventListener('click', (e) => {
+	console.log(`Clicked at X: \${e.offsetX}px, Y: \${e.offsetY}px`);
+});
+</script>
 </body>
 </html>
