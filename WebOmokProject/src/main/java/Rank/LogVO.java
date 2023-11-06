@@ -11,4 +11,5 @@ public class LogVO {
 	private int loser_no;
 	private Date log_date;
 	
+	
 }
