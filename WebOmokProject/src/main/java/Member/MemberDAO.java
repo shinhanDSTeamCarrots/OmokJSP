@@ -28,7 +28,7 @@ public class MemberDAO {
 		boolean result = false;
 		try {
 			con = dataFactory.getConnection();
-			String query = "SELECT count(*) AS cnt FROM MEMBER_TR WHERE id = ?";
+			String query = "SELECT count(*) AS cnt FROM MEMBER_TB WHERE id = ?";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, id);
@@ -51,7 +51,7 @@ public class MemberDAO {
 	public void addMember(MemberVO memberVO) {
 		try {
 			con = dataFactory.getConnection();
-			String query = "INSERT INTO MEMBER_TR (,,,,) VALUES(?,?,?,?)";
+			String query = "INSERT INTO MEMBER_TB (,,,,) VALUES(?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.executeUpdate();  //데이터베이스에 해당 SQL 쿼리가 실행
@@ -61,13 +61,13 @@ public class MemberDAO {
 		}
 	}
 	
-	//사용자 존재 여부
+	//사용자 존재 여부 확인
 	public boolean isExisted(MemberVO memberVO) {
 		boolean result = false;
 
 		try {
 			con = dataFactory.getConnection();
-			String query = "";
+			String query = "SELECT DECODE(count(*),1,'true','false') AS result FROM MEMBER_TB WHERE id=? AND pwd=?";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, memberVO.getId());
