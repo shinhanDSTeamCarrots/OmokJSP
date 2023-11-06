@@ -26,8 +26,9 @@
 <div id="wrap">
         <div class="b1">
           <h1>오목게임</h1><br>
-          <input type = "button" value = "방 만들기"><br>
-          <input type = "button" value = "로그인"><br>
+             <input type = "text" name = "id" id= "id" placeholder="아이디"><br>
+	        <input type = "password" name = "pw" id= "pw" placeholder="비밀번호"><br>
+            <input type = "button" value = "로그인"><br>
             <input type = "button" onclick = "window.open('omokRegister.jsp')" value = "회원가입">
         </div>
       </div>      
