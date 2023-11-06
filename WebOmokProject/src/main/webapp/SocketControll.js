@@ -2,7 +2,7 @@ var ip = "${pageContext.request.serverName}";
 var port = "${pageContext.request.serverPort}";
 var path = "${pageContext.request.contextPath}";
 var addr = "ws://"+ip+":"+port+"/"+path+"/"+"ChatingServer";
-addr = "ws://localhost:8901/WebOmokProject/OmokGameSocket";
+addr = "ws://localhost:8090/WebOmokProject/OmokGameSocket";
 //var webSocket = new WebSocket(addr);
 var webSocket;
 //var chatWindow, chatMessage, chatId;
@@ -11,14 +11,7 @@ var webSocket;
 var roomId, opponentId, myId;
 //방번호, 상대 번호, 내 번호
 
-class CallBackFunc{
-    omok;
-    chat;
-    image;
-    system;
-    join;
-}
-var callbackFunc = new CallBackFunc();
+var callbackFunc = {};
 
 function sendMessage(type, content) {
     let msgJson = new Object();
@@ -36,12 +29,10 @@ function RoomStart(param){
     roomId = param.roomId;
     myId = param.myId;
     opponentId = param.opponentId;
-    console.log(typeof param.chatCallback);
     callbackFunc.omok = param.omokcallback;
     callbackFunc.chat = param.chatCallback;
     callbackFunc.image = param.imageCallback;
     callbackFunc.system = param.systemCallback;
-    console.log(typeof callbackFunc.chat);
     addr = addr + "/"+roomId+"/"+myId;
     console.log("addr: "+addr);
     webSocket = new WebSocket(addr);
@@ -54,7 +45,7 @@ function omokPlay(stone, rowpos, colpos){
     msg.row = rowpos;
     msg.col = colpos;
     sendMessage("O",msg);
-    console.log("오목 전송: "+msgJson);
+    console.log("오목 전송: "+msg);
 }
 function sendChat(str){
     sendMessage("C",str);
@@ -101,24 +92,28 @@ function webSocketMethodSet(){
             //오목데이터
             //상대가 착수한 오목임
             //해당 값을 받을 사람에게 보냄
-            if(!callbackFunc.omok)
+            if(callbackFunc.omok)
                 callbackFunc.omok(jsontext.content.stone,jsontext.content.row,jsontext.content.col);
         }
         else if (jsontext.type == "S"){
             //시스템데이터
             //상대의 서렌, 소켓 타임아웃, 탈주, 승리 데이터, 접속 등...
-            if(!callbackFunc.system)
+            if(callbackFunc.system)
                 callbackFunc.system(opponentId,jsontext.content);
         }
         else if (jsontext.type == "C"){
             //확장형 채팅 데이터
-            if(!callbackFunc.chat)
+            if(callbackFunc.chat){
                 callbackFunc.chat(jsontext.content);
+            }
+            else{
+                alert("콜백이 없엉...");
+            }
             console.log(jsontext.content);
         }
         else if (jsontext.type == "I"){
             //확장 데이터 2
-            if(!callbackFunc.image)
+            if(callbackFunc.image)
                 callbackFunc.image("img/testImage/"+jsontext.content+".png");
         }
     

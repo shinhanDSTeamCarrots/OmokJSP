@@ -13,11 +13,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
 
 @ServerEndpoint(value="/OmokGameSocket/{roomId}/{playerId}")
 public class MySocket {
@@ -36,23 +32,13 @@ public class MySocket {
 		System.out.println("메시지 수신 " + session.getId() + ": " + message);
 		int roomId = -1;
 		try {
-			JSONParser parser = new JSONParser();
-			JSONObject jsonObject = (JSONObject)parser.parse(message);
+			JSONObject jsonObject = new JSONObject(message);
 			roomId = Integer.parseInt((String) jsonObject.get("roomId"));
 		}
-		catch(ParseException e){
+		catch(Exception e){
 			System.out.println("메시지 json 오류 ");
 		}
 		synchronized (clients) {
-			/*for (Session client : clients) { // 모든 클라이언트에게 메시지 전달
-				
-				if (!client.equals(session)) {
-					// 메시지를 보낸 클라이언트는 제외하고 전달
-					client.getBasicRemote().sendText(message);
-				}
-				
-			}*/
-			
 			//서버단에서 클라이언트 중에서 당사자한테만 전달
 			for (RSession client : clients) {
 				//메시지에서 받은 client
@@ -65,7 +51,8 @@ public class MySocket {
 
 	@OnClose // 클라이언트와의 연결이 끊기면 실행
 	public void onClose(Session session) {
-		clients.remove(session);
+		//clients.remove(session);
+		clients.removeIf(t -> t.getMsession().equals(session));
 		System.out.println("웹소켓 종료: " + session.getId());
 	}
 
