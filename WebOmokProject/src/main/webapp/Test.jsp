@@ -30,6 +30,10 @@
         param.omokcallback = function(stone, row, col){
             console.log("오목 콜백 함수");
             console.log("{상대이름} "+"가 "+row+","+col+"에 착수하였습니다.");
+
+
+
+            
     	    let dom = document.getElementById("omok_"+row+"_"+col);
             dom.className="omokbox blackplace";
             dom.omokval = "2";

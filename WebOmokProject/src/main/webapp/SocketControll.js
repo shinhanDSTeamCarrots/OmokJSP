@@ -98,6 +98,7 @@ function webSocketMethodSet(){
         else if (jsontext.type == "S"){
             //시스템데이터
             //상대의 서렌, 소켓 타임아웃, 탈주, 승리 데이터, 접속 등...
+            //상대의 서렌: 
             if(callbackFunc.system)
                 callbackFunc.system(opponentId,jsontext.content);
         }
@@ -105,9 +106,6 @@ function webSocketMethodSet(){
             //확장형 채팅 데이터
             if(callbackFunc.chat){
                 callbackFunc.chat(jsontext.content);
-            }
-            else{
-                alert("콜백이 없엉...");
             }
             console.log(jsontext.content);
         }
