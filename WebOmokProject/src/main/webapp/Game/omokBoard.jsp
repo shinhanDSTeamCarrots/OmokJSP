@@ -4,34 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>오목 플레이 보드</title>
-<style>
-#board_line {
-	display: grid;
-	width: 504px;
-    height: 504px;
-	grid-template-columns: repeat(18, 1fr);
-	grid-template-rows: repeat(18, 1fr);
-	border: solid 1px black;
-    margin : 25px;
-    position: relative; /* 부모 요소를 기준으로 자식 요소를 배치 */
-}
-.board_dot{
-	border: solid 1px black;
-}
-.dot{
-	width:10px;
-	height:10px;
-	background-color: black;
-	border-radius: 50%;
-	position: absolute;
-	transform: translate(-50%, -50%);
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../Game/CSS/omokBoardStyle.css">
 </head>
 <body>
-<div id="board_line">
+<div class="board_line">
 <c:forEach var="x" begin="0" end="17"> <!-- for(int x=0; x<18; x++)와 동일 -->
 	<c:forEach var="y" begin="0" end="17">
 		<div class='board_dot'></div>
@@ -45,9 +21,16 @@
 	</c:forEach>
 </c:forEach>
 </div>
+<!-- 좌표 표기를 위한 틀 생성 -->
+<div id="board">
+</div>
 <script type="text/javascript">
-document.getElementById('board_line').addEventListener('click', (e) => {
-	console.log(`Clicked at X: \${e.offsetX}px, Y: \${e.offsetY}px`);
+//클릭 시 콘솔 로그에 좌표값 출력
+document.getElementById('board').addEventListener('click', (e) => {
+	//좌표값 보정
+	let x = Math.round(e.offsetX/28);
+	let y = Math.round(e.offsetY/28);
+	console.log(`X: \${x}px, Y: \${y}px`);
 });
 </script>
 </body>

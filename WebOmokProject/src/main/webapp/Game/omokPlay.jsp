@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>오목 게임</title>
-<link rel="stylesheet" type="text/css" href="../Game/GameBoardStyle.css">
+<link rel="stylesheet" type="text/css" href="../Game/CSS/omokPlayStyle.css">
 <script>
 function exit(){
 	var is = confirm("정말 그만두시겠습니까?");
