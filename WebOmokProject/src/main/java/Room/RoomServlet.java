@@ -1,4 +1,4 @@
-package omok;
+package Room;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

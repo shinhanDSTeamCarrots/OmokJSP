@@ -1,4 +1,4 @@
-package omok;
+package Room;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,7 +18,7 @@ public class RoomDAO {
 	private Statement stmt;
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
    	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    	private static final String user = "CARROT";
+    private static final String user = "CARROT";
     
 	
 	
@@ -40,23 +40,23 @@ public class RoomDAO {
 		List <RoomVO> roomList = new ArrayList<RoomVO>();
 		try {
 			connDB();
-			String query = "select * from room_tb";
+			String query = "SELECT * FROM ROOM_TB";
 			System.out.println(query);
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
-				String room_id = rs.getString("room_id");
-				String owner_id = rs.getString("owner_id");
-				String joinplayer_id = rs.getString("joinplayer_id");
-				String room_nm = rs.getString("room_nm");
-				Date created_date= rs.getDate("created_date");
-				String room_pw = rs.getString("room_pw");
+				int ROOM_ID = rs.getInt("ROOM_ID");
+				int OWNER_ID = rs.getInt("OWNER_ID");
+				int JOINED_NO = rs.getInt("JOINED_NO");
+				String ROOM_NM = rs.getString("ROOM_NM");
+				Date CREATED_DATE= rs.getDate("CREATED_DATE");
+				String ROOM_PW = rs.getString("ROOM_PW");
 				RoomVO vo = new RoomVO();
-	            vo.setRoom_id(room_id);
-	            vo.setOwner_id(owner_id);
-	            vo.setJoinplayer_id(joinplayer_id);
-	            vo.setRoom_nm(room_nm);
-	            vo.setCreated_date(created_date);
-	            vo.setRoom_pw(room_pw);
+	            vo.setRoom_id(ROOM_ID);
+	            vo.setOwner_id(OWNER_ID);
+	            vo.setJoined_no(JOINED_NO);
+	            vo.setRoom_nm(ROOM_NM);
+	            vo.setCreated_date(CREATED_DATE);
+	            vo.setRoom_pw(ROOM_PW);
 	            roomList.add(vo);
 	            			}
 	            rs.close();
@@ -71,17 +71,19 @@ public class RoomDAO {
 		public void addRoom(RoomVO r) {
 			try {
 				con = dataFactory.getConnection();
-				String room_id = r.getRoom_id();
-				String owner_id = r.getOwner_id();
-				String joinplayer_id = r.getJoinplayer_id();
-				String room_pw = r.getRoom_pw();
-				String query = "INSERT INTO ROOM_TB(owner_id, joinplayer_id, room_pw"
-						+ "VALUES(?, ?, ?, ?)";
+				//int ROOM_ID = r.getRoom_id();
+				int OWNER_ID = r.getOwner_id();
+				//int JOINED_NO = r.getJoined_no();
+				String ROOM_NM = r.getRoom_nm();
+				String ROOM_PW = r.getRoom_pw();
+				String query = "INSERT INTO ROOM_TB(ROOM_ID, OWNER_ID, ROOM_NM, ROOM_PW"
+						+ "VALUES(ROOM_SEQ.NEXTVAL, ?, ?, ?)";
 				System.out.println(query);
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, owner_id);
-				pstmt.setString(2, joinplayer_id);
-				pstmt.setString(3, room_pw);
+				pstmt.setInt(1, OWNER_ID);
+				
+				pstmt.setString(2, ROOM_NM);
+				pstmt.setString(3, ROOM_PW);
 				pstmt.executeUpdate();
 				pstmt.close();
 				con.close();		
@@ -90,26 +92,54 @@ public class RoomDAO {
 				e.printStackTrace();
 								}
 										}
-		public void delRoom(String room_id) {
+		public void delRoom(int ROOM_ID) {
 			try {
-				con = dataFactory.getConnection();
-				String query = "delete from room_tb where id = ?";
+				con = dataFactory.getConnection();				
+				String query = "DELETE FROM ROOM_TB WHERE ID = ?";
 				System.out.println(query);
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, room_id);
-				pstmt.setString(2, owner_id);
-				pstmt.settString(3, joinplayer_id);
-				pstmt.setString(4, room_nm);
-				pstmt.setDate(5, created_date);
-				pstmt.setString(6, room_pw);
+				pstmt.setInt(1, ROOM_ID);
+				
 				pstmt.executeUpdate();
 				} 
 			catch(Exception e) {
 				e.printStackTrace();
 					}
-			
 		}
+		public void playerJoined(int ROOM_ID, int JOINED_NO) {
+			try {
+				con = dataFactory.getConnection();
+				String query = "INSERT INTO ROOM_TB WHERE ROOM_ID = ?";
+				System.out.println(query);
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, JOINED_NO);
+				pstmt.executeUpdate();
+				pstmt.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public void playerExit(int ROOM_ID, int JOINED_NO) {
+			try { 
+				con = dataFactory.getConnection();
+				String query = "DELETE FROM ROOM_TB WHERE ROOM_ID = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, JOINED_NO);
+				pstmt.executeUpdate();
+				pstmt.close();
+				con.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+		}
+			
+			
+			
+			
+	}
 				
- }	
+ 	
 
 	
