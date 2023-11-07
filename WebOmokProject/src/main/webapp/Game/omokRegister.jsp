@@ -28,9 +28,9 @@
     	checkPwd = document.getElementById('checkPwd');
     	
     	email = document.getElementById("email");
-    	if(id.value == "" ){
+    	if(id.value.trim() == "" ){
     		alert("아이디를 입력해 주세요.");
-    	} else if(pwd.value==""){
+    	} else if(pwd.value.trim()==""){
     		alert("비밀번호를 입력해 주세요.");
     	} else if(pwd.value!=checkPwd.value){
     		alert("비밀번호가 일치하지 않습니다.");
@@ -39,7 +39,6 @@
     	}
     	
     	//아이디 중복확인
-    	//입력값 디비에 어떻게 연동?
     }
     </script>
 </head>
