@@ -46,7 +46,9 @@
     		url : "${contextPath}",
     		dataType : "text",
     		data : {id : _id},
-    		//success: function
+    		/*success: function(data, textStatus){
+    			
+    		}*/
     		
     		
     	})
