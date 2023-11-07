@@ -21,13 +21,32 @@
 	            <!-- 여기에 동적으로 방이 추가 -->
 	            <table>
 	            	<tr>
-		            	<th>방 번호</th>
 		            	<th>생성자</th>
 		            	<th>방 이름</th>
 		            	<th>방 생성일</th>
+		            	<th>
 	            	</tr>
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
-	            	
+	            	<c:if test="${empty listRoom }">
+					<tr>
+						<td colspan="7">
+							<b>생성된 방이 없습니다.</b>
+						</td>
+					</tr>
+					</c:if>
+					<c:forEach var="room" items="${listRoom }">
+					<tr align="center">
+						<td>${room.ROOM_ID }</td>
+						<td>${room.OWNER_ID }</td>
+						<td>${room.JOINED_NO }</td>
+						<td>${room.ROOM_NM }</td>
+						<td>${room.CREATED_DATE }</td>
+						<td><a href="">입장</a></td>
+						<!-- 이거 띄울 필요 없음 -->
+					<!-- <% MemberVO memvo = (MemberVO)request.getSession().getAttribute("myvo"); %> -->
+					</tr>
+					</c:forEach>
+					
 	            
 	            </table>
 	        </div>
@@ -56,15 +75,34 @@
 	<!-- 방생성 폼 -->
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">
-			<h2>방 만들기</h2>
+			
 			
 			<form id="createRoomForm">
-	        <label for="roomName">방 이름:</label>
-	        <input type="hidden" id="creatorId" name="creatorId">
-	        <input type="text" id="roomName" name="roomName" required>
-	        <br><br>
-	        <input type="submit" value="생성">
-	        <input type="button" id="cancelButton" value="취소">
+	        <h2>방 만들기</h2>
+	        
+	        <table align="center">
+	        <!-- 생성자 아이디 받아와서 넣어주기 -->
+			<tr>
+				<td width="200"><p align="right">생성자</p></td>
+				<td width="400"><input type="" name="OWNER_ID"></td>
+			</tr>
+			<tr>
+				<td width="200"><p align="right">방 이름</p></td>
+				<td width="400"><input type="text" name="ROOM_NM"></td>
+			</tr>
+			<tr>
+				<td width="200"><p align="right">방 비밀번호</p></td>
+				<td width="400"><input type="password" name="ROOM_PW"></td>
+			</tr>
+			<tr>
+				<td width="200"><p>&nbsp;</p></td>
+				<td width="400">
+					<input type="submit" value="생성">
+					<input type="button" id="cancelButton" value="취소">
+				</td>
+			</tr>
+			</table>
+	  
         </div>
     </form>
 		
@@ -115,6 +153,7 @@
 		        modalOff()
 		    }
 		})
+		//생성버튼 클릭시 그냥 게임화면으로 넘어가게만 하면됨
 		window.addEventListener("keyup", e => {
 		    if(isModalOn() && e.key === "Escape") {
 		        modalOff()
