@@ -11,7 +11,7 @@ function exit(){
 	var is = confirm("정말 그만두시겠습니까?");
 	
 	if(is){
-		location.href="";
+		location.href="/WebOmokProject/room/listRoom.jsp";
 	}
 }
 </script>
