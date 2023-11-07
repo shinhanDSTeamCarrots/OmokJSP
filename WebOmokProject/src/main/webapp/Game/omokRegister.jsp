@@ -48,7 +48,7 @@
            <h1>회원가입</h1>
           <input type = "text" name = "id" id= "id" placeholder="아이디"><button>중복확인</button><br>
           <input type = "password" name = "pwd" id = "pwd" placeholder="비밀번호"><br>
-          <input type ="text" name = "checkPwd" id = "checkPwd" placeholder="비밀번호 확인"><br>
+          <input type ="password" name = "checkPwd" id = "checkPwd" placeholder="비밀번호 확인"><br>
           <input type = "text" name= "name" id = "name" placeholder="이름"><br>
           <input type="text" name = "nicknm" id ="nicknm" placeholder="닉네임"><br>
           <input type = "email" name = "email" id="email" placeholder="이메일"><br>
