@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  * Servlet implementation class MemberController
  */
@@ -46,12 +45,20 @@ public class MemberController extends HttpServlet {
 			nextPage = "/WEB-INF/view/common/alert.jsp";
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
 			MemberVO memberVO = new MemberVO();
-			
-			
-			
+
+			memberVO.setMember_id(request.getParameter(""));
+			memberVO.setMember_nicknm(request.getParameter(""));
+			memberVO.setEmail(request.getParameter(""));
+			memberService.joinMember(memberVO);
+
 			nextPage = "/WebOmokProject/.jsp"; //로그인 페이지로 이동
 		} else if("/loginMember.do".equals(action)) { //로그인
-			//성공 시 회원 정보 저장 코드 작성 필요
+			MemberVO memberVO = new MemberVO();
+			
+			memberVO.setMember_id(request.getParameter(""));
+			memberVO.setMember_pw(request.getParameter(""));
+			memberService.loginMember(memberVO);
+
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
 		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
@@ -65,4 +72,5 @@ public class MemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("myvo", memberVO);
 	}
+	
 }
