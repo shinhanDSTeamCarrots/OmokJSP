@@ -72,4 +72,10 @@ public class MemberController extends HttpServlet {
 		session.setAttribute("myvo", memberVO);
 	}
 	//비밀번호 암호화 함수 추가
+//	// 비밀번호 암호화
+//	String _pwd = memberVO.getMember_pw();
+//	MessageDigest md = MessageDigest.getInstance();
+//	md.update(_pwd.getBytes());
+//	String hex = String.format("%064x", new BigInteger(1, md.digest()));
+
 }
