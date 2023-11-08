@@ -71,7 +71,7 @@
     	})
     	$.ajax({
     		type = "post",
-    		async = true,
+    		async = "false",
     		url : "${contextPath}/Member/loginMember.do",
     		dataType : "text",
     		data: {id: _id},
