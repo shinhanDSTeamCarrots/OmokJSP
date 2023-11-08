@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  * Servlet implementation class MemberController
  */
@@ -72,4 +71,5 @@ public class MemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("myvo", memberVO);
 	}
+	
 }
