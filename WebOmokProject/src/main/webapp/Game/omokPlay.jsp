@@ -6,15 +6,6 @@
 <meta charset="UTF-8">
 <title>오목 게임</title>
 <link rel="stylesheet" type="text/css" href="../Game/CSS/omokPlayStyle.css">
-<script>
-function exit(){
-	var is = confirm("정말 그만두시겠습니까?");
-	
-	if(is){
-		location.href="/WebOmokProject/room/listRoom.jsp";
-	}
-}
-</script>
 </head>
 <body>
     <div class="game_container">
@@ -47,5 +38,8 @@ function exit(){
 	        </div>
         </div>
     </div>
+    <script src="js/omokPlayEvent.js"></script>
+    <script src="js/requSendFunction.js"></script>
+    <script src="SocketControll.js"></script>
 </body>
 </html>
