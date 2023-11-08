@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/RoomController")
+@WebServlet("/RoomController/*")
 public class RoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

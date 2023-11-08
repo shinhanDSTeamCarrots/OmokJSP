@@ -38,22 +38,6 @@
     		alert("이메일을 입력해 주세요.");
     	}
     } 
-    function idCheck(){
-    	var _id = $("#id");
-    	$.ajax({
-    		type : "post",
-    		async : true,
-    		url : "${contextPath}",
-    		dataType : "text",
-    		data : {id : _id},
-    		/*success: function(data, textStatus){
-    			
-    		}*/
-    		
-    		
-    	})
-    }
-  	//아이디 중복확인
     </script>
 </head>
 <body>
@@ -67,7 +51,7 @@
           <input type = "text" name= "name" id = "name" placeholder="이름"><br>
           <input type="text" name = "nicknm" id ="nicknm" placeholder="닉네임"><br>
           <input type = "email" name = "email" id="email" placeholder="이메일"><br>
-          <input type = "submit" value = "가입하기" onclick=check()>             
+          <input type = "submit" value = "가입하기" >             
         </div>
     </div>
 </body>
