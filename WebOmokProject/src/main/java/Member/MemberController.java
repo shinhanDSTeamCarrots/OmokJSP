@@ -45,7 +45,7 @@ public class MemberController extends HttpServlet {
 			nextPage = "/WEB-INF/view/common/alert.jsp";
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
 			MemberVO memberVO = new MemberVO();
-			
+
 			memberVO.setMember_id(request.getParameter(""));
 			memberVO.setMember_nicknm(request.getParameter(""));
 			memberVO.setEmail(request.getParameter(""));
@@ -58,6 +58,7 @@ public class MemberController extends HttpServlet {
 			memberVO.setMember_id(request.getParameter(""));
 			memberVO.setMember_pw(request.getParameter(""));
 			memberService.loginMember(memberVO);
+
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
 		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
