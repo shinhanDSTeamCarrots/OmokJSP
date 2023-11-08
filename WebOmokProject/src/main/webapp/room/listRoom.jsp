@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Rank.RankDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +27,8 @@
 		            	<th>방 생성일</th>
 		            	<th>
 	            	</tr>
+	            	
+	            	
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
 	            	<c:if test="${empty listRoom }">
 					<tr>
@@ -53,23 +56,29 @@
 	    <!-- 사용자 랭크 목록 -->
 	    <div class="rank-list">
 	    	<div id="rank_wrap" style="height: 3420px;">
+	    			
 		        <table>
 		            <tr>
 		                <th>사용자</th>
-		                <th>랭크</th>
+		                <th>승률</th>
 		            </tr>
 		            <!-- RankDAO로 값 넣어주기 -->
-		            <c:forEach items="${userRankList}" var="userRank">
+		            <%
+		            	RankDAO rankDAO = new RankDAO();
+		            	List<UserRankVO> userRanks = new ArrayList<>();
+		            	for
+		            %>
+		            <c:forEach items="${userRank}" var="userRank">
 		                <tr>
-		                    <td>${userRank.username}</td>
-		                    <td>${userRank.rank}</td>
+		                    <td>${userRank.memberId}</td>
+		                    <td>${userRank.winRate}</td>
 		                </tr>
 		            </c:forEach>
 		        </table>
 	        </div>
 	    </div>
     </div>
-    
+    우
 	<!-- 방생성 폼 -->
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">			
