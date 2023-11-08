@@ -38,31 +38,31 @@ public class MemberController extends HttpServlet {
 		
 		//아이디 중복 여부
 		if("/duplicateMember.do".equals(action)) {
-			request.setAttribute("msg", "사용할 수 있는 아이디입니다.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "T");
 		} else if(!"/duplicateMember.do".equals(action)) { //사용 중인 아이디
-			request.setAttribute("msg", "이미 사용 중인 아이디입니다.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "F");
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
+			//비밀번호 암호화
+			
 			MemberVO memberVO = new MemberVO();
 			
-			memberVO.setMember_id(request.getParameter(""));
-			memberVO.setMember_nicknm(request.getParameter(""));
-			memberVO.setEmail(request.getParameter(""));
+			memberVO.setMember_id(request.getParameter("signId"));
+			memberVO.setMember_pw(request.getParameter("signPw"));
+			memberVO.setMember_nicknm(request.getParameter("signName"));
+			memberVO.setEmail(request.getParameter("signEmail"));
 			memberService.joinMember(memberVO);
 
 			nextPage = "/WebOmokProject/.jsp"; //로그인 페이지로 이동
 		} else if("/loginMember.do".equals(action)) { //로그인
 			MemberVO memberVO = new MemberVO();
 			
-			memberVO.setMember_id(request.getParameter(""));
-			memberVO.setMember_pw(request.getParameter(""));
+			memberVO.setMember_id(request.getParameter("loginId"));
+			memberVO.setMember_pw(request.getParameter("loginPw"));
 			memberService.loginMember(memberVO);
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
 		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
-			request.setAttribute("msg", "아이디, 비밀번호를 확인해주세요.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "F");
 		}
 	}
 	
@@ -71,5 +71,5 @@ public class MemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("myvo", memberVO);
 	}
-	
+	//비밀번호 암호화 함수 추가
 }
