@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class RoomDAO {
@@ -16,30 +18,20 @@ public class RoomDAO {
 	private Connection con;
 	private DataSource dataFactory;
 	private Statement stmt;
-	private static final String driver = "oracle.jdbc.driver.OracleDriver";
-   	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String user = "CARROT";
-    
 	
-	
-	
-	private void connDB() {
+	public RoomDAO() {
 		try {
-			Class.forName(driver);
-			System.out.println("Oracle 드라이버 로딩 성공");
-			con = DriverManager.getConnection(url);
-            System.out.println("Connection 생성 성공");
-            stmt = con.createStatement();
-			
-			}
-		catch(Exception e){
+			Context ctx = new InitialContext();
+			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+		} catch (Exception e) {
 			e.printStackTrace();
-				}
-	}
+		}
+	}	
 	public List<RoomVO> listRoom(){
 		List <RoomVO> roomList = new ArrayList<RoomVO>();
 		try {
-			connDB();
+			con = dataFactory.getConnection();
 			String query = "SELECT * FROM ROOM_TB";
 			System.out.println(query);
 			ResultSet rs = stmt.executeQuery(query);
@@ -71,9 +63,7 @@ public class RoomDAO {
 		public void addRoom(RoomVO r) {
 			try {
 				con = dataFactory.getConnection();
-				//int ROOM_ID = r.getRoom_id();
 				int OWNER_ID = r.getOwner_id();
-				//int JOINED_NO = r.getJoined_no();
 				String ROOM_NM = r.getRoom_nm();
 				String ROOM_PW = r.getRoom_pw();
 				String query = "INSERT INTO ROOM_TB(ROOM_ID, OWNER_ID, ROOM_NM, ROOM_PW"
@@ -133,9 +123,5 @@ public class RoomDAO {
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-		}
-			
-			
-			
-			
-	}
+		}			
+}
