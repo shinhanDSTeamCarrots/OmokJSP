@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MemberController
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/member/*")
 public class MemberController extends HttpServlet {
 
-	MemberDAO memberDAO;
+	MemberService memberService;
 	
 	public void init (ServletConfig config) throws ServletException{
-		memberDAO = new MemberDAO();
+		memberService = new MemberService();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,5 +32,11 @@ public class MemberController extends HttpServlet {
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	}
+	
+	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MemberVO memberVO = memberService.loginMember(null);
+		HttpSession session = request.getSession();
+		session.setAttribute("myvo", memvo);
 	}
 }
