@@ -23,8 +23,6 @@ public class Omok extends HttpServlet {
 	// 나중에 ajax 양방향 통신을 위해 json.simpple-1.1.1.jar 라이브러리 가져올 것
 	
 	RankDAO rankDao;
-	private static int win_count = 0;
-	private static int lose_count = 0;
 	
 	@Override
 	@SuppressWarnings("unchecked")//랭킹 가져오기
@@ -38,8 +36,8 @@ public class Omok extends HttpServlet {
 		   rankDao = new RankDAO();
 	   try {
 		   LogVO logvo = new LogVO();
-		   logvo.setWinner_no(win_count);
-		   logvo.setLoser_no(lose_count);
+		   logvo.setWinner_no(WinCount);
+		   logvo.setLoser_no(LoseCount);
 		   rankDao.addLog(logvo);
 		   
 	   } catch (Exception e) {
@@ -81,12 +79,10 @@ public class Omok extends HttpServlet {
 		 HttpSession session = request.getSession();	
 		 
 		 session.setAttribute("sessionPlayer", WhoIsPlayer);
-		 
-		 // 서로 다른 플레이어(클라이언트)끼리 보드판을 공유하고자하여, 서블릿컨텍스트로 저장한다.
-		 ServletContext context = getServletContext();
+		
 		 
 		 // Board 객체를 생성.. 하지만 하지만 board에 아무런 데이터가 없다면 if 조건문을 타고 객체를 만든다.. 다음 실행때는 if문 안타고 getAttibute 호출해서 "board" 속성 가져옴..
-		 Board board = (Board) context.getAttribute("board");  
+		 Board board = (Board) session.getAttribute("board");  
 	        if (board == null) {
 	            board = new Board();
 	            session.setAttribute("board", board);  // 서블릿은 데이터를 JSP에 보내줘야함. 그런데 어떻게??
@@ -173,16 +169,14 @@ public class Omok extends HttpServlet {
 		HttpSession session = request.getSession();	
 		 
 		session.setAttribute("sessionPlayer", WhoIsPlayer);
-		 
-		// 서로 다른 플레이어(클라이언트)끼리 보드판을 공유하고자하여, 서블릿컨텍스트로 저장한다.
-		ServletContext context = getServletContext();
+		
 		 
 		// Board 객체를 생성.. 하지만 하지만 board에 아무런 데이터가 없다면 if 조건문을 타고 객체를 만든다.. 다음 실행때는 if문 안타고 getAttibute 호출해서 "board" 속성 가져옴..
-		Board board = (Board) context.getAttribute("board");  
+		Board board = (Board) session.getAttribute("board");  
 		if (board == null) {
 		   board = new Board();
 		   session.setAttribute("board", board);  // 서블릿은 데이터를 JSP에 보내줘야함. 그런데 어떻게??
-		   // session.setAttribute("board", board);로 속성을 집어넣고
+		   											// session.setAttribute("board", board);로 속성을 집어넣고
 		    									   // JSP에서 <% String strStone = (String)request.getAttribute("board"); %>로 속성을 얻는다.
 		}
 		
