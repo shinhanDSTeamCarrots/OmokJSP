@@ -29,21 +29,19 @@
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
 	            	<c:if test="${empty listRoom }">
 					<tr>
-						<td colspan="7">
+						<td colspan="5">
 							<b>생성된 방이 없습니다.</b>
 						</td>
 					</tr>
 					</c:if>
 					<c:forEach var="room" items="${listRoom }">
 					<tr align="center">
-						<td>${room.ROOM_ID }</td>
 						<td>${room.OWNER_ID }</td>
 						<td>${room.JOINED_NO }</td>
 						<td>${room.ROOM_NM }</td>
-						<td>${room.CREATED_DATE }</td>
-						<td><a href="">입장</a></td>
+						<td><a href="">${room.CREATED_DATE }</a></td>
 						<!-- 이거 띄울 필요 없음 -->
-					<!-- <% MemberVO memvo = (MemberVO)request.getSession().getAttribute("myvo"); %> -->
+					
 					</tr>
 					</c:forEach>
 					
@@ -74,8 +72,7 @@
     
 	<!-- 방생성 폼 -->
 	<div id="modal" class="modal-overlay">
-		<div class="modal-window">
-			
+		<div class="modal-window">			
 			
 			<form id="createRoomForm">
 	        <h2>방 만들기</h2>
@@ -112,13 +109,7 @@
 
     <!-- JavaScript 코드 -->
     <script>
-        // 방을 목록에 추가하는 함수
-        function addRoomToList(creatorID, roomName) {
-            var roomList = document.getElementById("room_wrap");
-            var div = document.createElement("div");
-            div.textContent = "방 생성자: " + creatorID + ", 방 이름: " + roomName;
-            roomList.appendChild(div);
-        }
+        
         
         
         

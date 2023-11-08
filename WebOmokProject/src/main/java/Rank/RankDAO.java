@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -46,10 +48,13 @@ public class RankDAO {
 	}
 	
 	//승률계산
-	public double winRate(int member_no) {
+	public Map<Integer, Double> winRate(int member_no) {
 		Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        
+        Map<Integer, Double> result = new HashMap<>();
+        
 		try {
 			con=dataFactory.getConnection();
 						
@@ -59,6 +64,7 @@ public class RankDAO {
 			rs=pstmt.executeQuery();
 			rs.next();
 			int winCnt=rs.getInt("WIN_CNT");
+			result.put(1, (double) winCnt);
 			
 			String losequery="SELECT COUNT(LOSER_NO) AS LOSE_CNT FROM LOG_TB WHERE LOSER_NO=?";
 			pstmt=con.prepareStatement(losequery);		
@@ -66,16 +72,16 @@ public class RankDAO {
 			rs=pstmt.executeQuery();
 			rs.next();
 			int loseCnt=rs.getInt("LOSE_CNT");
+			result.put(2, (double) loseCnt);
 			
 			double winRate=0.0;
 			if(winCnt + loseCnt > 0) {
 				winRate = (double)winCnt / (winCnt + loseCnt) * 100.0;
 			}
-			return winRate;
+			result.put(3, winRate);
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
-			return 0.0;
 		} finally {
             try {
                 if (rs != null) {
@@ -91,5 +97,7 @@ public class RankDAO {
                 e.printStackTrace();
             }
 		}
+		
+		return result;
 	}
 }
