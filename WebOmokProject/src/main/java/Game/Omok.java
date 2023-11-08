@@ -59,8 +59,7 @@ public class Omok extends HttpServlet {
 		else if (command.equals("opp.do")) {
 			oppStoneSet(request,response);
 		}
-		
-		
+
 	}
 	
 	
