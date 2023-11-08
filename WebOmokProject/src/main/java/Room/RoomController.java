@@ -55,6 +55,8 @@ public class RoomController extends HttpServlet {
 			int JOINED_NO = (Integer.parseInt(request.getParameter("JOINED_NO")));
 			
 		}
-	}
+		else if("/playerExited.do"equal(action)){
+			int Exited_NO = 	
+		}
 
 }
