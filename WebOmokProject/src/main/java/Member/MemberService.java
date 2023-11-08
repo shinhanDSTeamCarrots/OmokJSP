@@ -22,7 +22,7 @@ public class MemberService {
 	}
 	
 	//로그인
-	public MemberVO loginMember(MemberVO memberVO) {
+	public void loginMember(MemberVO memberVO) {
 		memberDAO.isExisted(memberVO);
 	}
 }
