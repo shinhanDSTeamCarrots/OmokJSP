@@ -30,20 +30,13 @@
 	            	
 	            	
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
-	            	<c:if test="${empty listRoom }">
-					<tr>
-						<td colspan="5">
-							<b>생성된 방이 없습니다.</b>
-						</td>
-					</tr>
-					</c:if>
-					<c:forEach var="room" items="${listRoom }">
+	            	
+					<c:forEach var="room" items="${roomList }">
 					<tr align="center">
 						<td>${room.OWNER_ID }</td>
 						<td>${room.JOINED_NO }</td>
-						<td>${room.ROOM_NM }</td>
-						<td><a href="">${room.CREATED_DATE }</a></td>
-						<!-- 이거 띄울 필요 없음 -->
+						<td><a href="">${room.ROOM_NM }</td>
+						<td>${room.CREATED_DATE }</a></td>					
 					
 					</tr>
 					</c:forEach>
@@ -63,11 +56,7 @@
 		                <th>승률</th>
 		            </tr>
 		            <!-- RankDAO로 값 넣어주기 -->
-		            <%
-		            	RankDAO rankDAO = new RankDAO();
-		            	List<UserRankVO> userRanks = new ArrayList<>();
-		            	for
-		            %>
+		            
 		            <c:forEach items="${userRank}" var="userRank">
 		                <tr>
 		                    <td>${userRank.memberId}</td>
@@ -94,7 +83,7 @@
 			</tr>
 			<tr>
 				<td width="200"><p align="right">방 이름</p></td>
-				<td width="400"><input type="text" name="ROOM_NM"></td>
+				<td width="400"><input type="text" name="ROOM_NM" required=true></td>
 			</tr>
 			<tr>
 				<td width="200"><p align="right">방 비밀번호</p></td>
@@ -117,17 +106,8 @@
     
 
     <!-- JavaScript 코드 -->
-    <script>
-        
-        
-        
-        
-        const loremIpsum = document.getElementById("lorem-ipsum")
-        
-        fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-            .then(response => response.text())
-            .then(result => loremIpsum.innerHTML = result)
-            
+    <script>      
+      
        	const modal = document.getElementById("modal")
        	
 		function modalOn() {
@@ -160,6 +140,7 @@
 		    }
 		})     
   
+		
     </script>
 </body>
 </html>
