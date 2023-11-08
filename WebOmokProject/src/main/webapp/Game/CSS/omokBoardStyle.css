@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.board_line {
+	display: grid;
+	width: 504px;
+    height: 504px;
+	grid-template-columns: repeat(18, 1fr);
+	grid-template-rows: repeat(18, 1fr);
+	border: solid 1px black;
+    margin : 25px;
+    position: absolute;
+}
+.board_dot{
+	border: solid 1px black;
+}
+.dot{
+	width:10px;
+	height:10px;
+	background-color: black;
+	border-radius: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+}
+#board{
+	width: 504px;
+    height: 504px;
+    position: absolute;
+    margin : 25px;
+}
