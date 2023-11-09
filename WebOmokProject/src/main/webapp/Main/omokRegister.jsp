@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-<title>Insert title here</title>
+<title>회원 가입</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"  />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -86,33 +86,35 @@
 </head>
 <body>
 	<div class="container">
-		<div class="form">
+		<div class="content">
 			<form method="post">
+				<h2>회원가입</h2>
 				<div class="input-group">
-				    <h2>회원가입</h2>
-				
-				    <label for="id">아이디</label>
-				    <input type="text" name="signId" id="id" placeholder="아이디">
-				    <input type="button" id="btn_duplicate" value="중복확인" onClick="idCheck()" /><br>
-				    
-				    <label for="pwd">비밀번호</label>
-				    <input type="password" name="signPw" id="pwd" placeholder="비밀번호"><br>
-				
-				    <label for="checkPwd">비밀번호 확인</label>
-				    <input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"><br>
-				
-				    <label for="name">이름</label>
-				    <input type="text" name="signName" id="name" placeholder="이름"><br>
-				
-				    <label for="nicknm">닉네임</label>
-				    <input type="text" name="nicknm" id="nicknm" placeholder="닉네임"><br>
-				
-				    <label for="email">이메일</label>
-				    <input type="email" name="signEmail" id="email" placeholder="이메일"><br>
-				
+				    <label for="id">아이디
+					    <input type="text" name="signId" id="id" placeholder="아이디">
+					    <input type="button" id="btn_duplicate" value="중복확인" onClick="idCheck()" />
+				    </label>
+				    <label for="pwd">비밀번호
+				    	<input type="password" name="signPw" id="pwd" placeholder="비밀번호">
+					</label>
+				    <label for="checkPwd">비밀번호 확인
+				    	<input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인">
+					</label>
+				    <label for="name">이름
+				    	<input type="text" name="signName" id="name" placeholder="이름">
+					</label>
+				    <label for="nicknm">닉네임
+				    	<input type="text" name="nicknm" id="nicknm" placeholder="닉네임">
+					</label>
+				    <label for="email">이메일
+				    	<input type="email" name="signEmail" id="email" placeholder="이메일">
+				    </label>
 				    <input type="button" value="가입하기" onClick="check()">
 				</div>
 			</form>
+			<div class="bearImg">
+				<img src = "../img/bear.png">
+			</div>
 		</div>
 	</div>
 </body>
