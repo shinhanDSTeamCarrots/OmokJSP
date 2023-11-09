@@ -52,11 +52,12 @@ public class RoomController extends HttpServlet {
 			nextPage = "/WebOmokProject/room/listRoom.jsp";
 		}
 		else if("/playerJoined.do".equals(action)) {
-			int JOINED_NO = (Integer.parseInt(request.getParameter("JOINED_NO")));
+			int JOINED_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
 			
 		}
-		else if("/playerExited.do"equal(action)){
-			int Exited_NO = 	
+		else if("/playerExited.do".equals(action)){
+			int Exited_NO = Integer.parseInt(request.getParameter("JOINED_NO"));	
 		}
 
+	}
 }

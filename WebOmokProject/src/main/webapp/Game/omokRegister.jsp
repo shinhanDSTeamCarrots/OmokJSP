@@ -51,12 +51,12 @@
     	}
     	$.ajax({
     		type = "post",
-    		async = true,
+    		async = false,
     		url : "${contextPath}/Member/duplicateMember.do",
     		dataType : "text",
     		data: {id: _id},
     		success : function(msg){
-    			if(msg=="T"){
+    			if(msg=="사용할 수 있는 아이디입니다."){
     				alert("사용할 수 있는 아이디입니다.")
     			} else{
     				alert("사용할 수 없는 아이디입니다.")
