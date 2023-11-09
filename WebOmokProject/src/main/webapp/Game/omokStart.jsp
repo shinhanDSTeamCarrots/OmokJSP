@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <!DOCTYPE html>
   <html>
 
@@ -7,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <title>로그인</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style>
       #wrap {
         display: flex;
@@ -25,25 +25,30 @@
     </style>
     <script>
       function whenLoginClick() {
+        console.log("로그인 시도");
         let id = document.getElementById("loginId");
         let pwd = document.getElementById("loginPw");
         if (id.value.trim() == "") {
+          console.log("아이디 입력 오류");
           alert("id를 입력해 주세요!");
           return;
         } else if (pwd.value.trim() == "") {
+          console.log("패스워드 입력 오류");
           alert("패스워드를 입력해 주세요!");
           return;
         }
+        console.log("ajax 시작");
         $.ajax({
-          type: "post",
-          async: "false",
           url: "${contextPath}/member/loginMember.do",
+          type: "POST",
+          async: "false",
           dataType: "text",
           data: {
             "loginId": id,
             "loginPw": pwd
           },
           success: function (msg) {
+            console.log("ajax 성공");
             if (msg == "T") {
               //FLAGS "방으로"
               window.self.location="/omokRegister.jsp";
