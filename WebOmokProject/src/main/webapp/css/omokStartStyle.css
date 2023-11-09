@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+#wrap {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.b1 {
+	width: 350px;
+	height: 350px;
+	border: 1px solid #000;
+	box-sizing: border-box;
+	text-align: center;
+}
