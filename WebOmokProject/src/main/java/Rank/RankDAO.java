@@ -4,12 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import Member.MemberVO;
 
 public class RankDAO {
 	private Connection con;
@@ -46,6 +50,25 @@ public class RankDAO {
 			e.printStackTrace();
 		}
 	}
+	//membervo에서 memberno기준으로 memberid 찾는거
+	public String notoid(int member_no) {
+		String findid=null;
+		try {
+			con=dataFactory.getConnection();
+			String query = "SELECT MEMBER_ID FROM MEMBER_TB WHERE MEMBER_NO = ?";
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, member_no);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				findid=rs.getString("member_id");
+			}
+			pstmt.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return findid;
+	}
+	
 	
 	//승률계산
 	public Map<Integer, Double> winRate(int member_no) {
@@ -100,4 +123,7 @@ public class RankDAO {
 		
 		return result;
 	}
+	//memberno기준으로 승률과 memerid찾아서 띄우기
+	
+
 }
