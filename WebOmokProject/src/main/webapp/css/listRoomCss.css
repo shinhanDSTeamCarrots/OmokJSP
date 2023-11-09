@@ -6,17 +6,16 @@ body {
     background-color: #F9B572;
 }
 .image {
-	width: 80px;
+	width: 100px;
 	height: auto;
 	margin: 10px;
 }
-#miniTitle{
-	align: center;
-}
+
 .buttonplace {
     height: 5vw;
-    line-height:100%
-    margin-bottom: 2vw; /* Added margin to create space below */
+    line-height: 100%;
+    margin-bottom: 2vw;
+    right: 33%; /* Align to the right end of room-list */
 }
 
 .container {
@@ -66,7 +65,6 @@ table {
 }
 
 th, td {
-    border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
 }

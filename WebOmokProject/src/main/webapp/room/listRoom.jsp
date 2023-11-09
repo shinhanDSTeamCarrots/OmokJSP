@@ -28,10 +28,7 @@ System.out.println(memberWinRates.size());
 </head>
 <body>
 	<div id="miniTitle">
-				<img src="../img/O.png" alt="Image 1" class="image">
-				<img src="../img/M.png" alt="Image 2" class="image">
-				<img src="../img/O.png" alt="Image 3" class="image">
-				<img src="../img/K.png" alt="Image 3" class="image">
+				<img src="../img/omoktitle.png" alt="Image 1" class="image">
 	</div>
 	<div id="container">
 		<!-- 방 만들기 버튼 -->
