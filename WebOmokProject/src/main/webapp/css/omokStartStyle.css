@@ -50,7 +50,17 @@ body {
     width: 150px;
     height: 150px;
     margin: 50px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
+
+.image {
+    width: 100px;
+    height: auto;
+    margin: 20px;
+}
+
 .container > #button{
     margin: 15px 0;
 }
