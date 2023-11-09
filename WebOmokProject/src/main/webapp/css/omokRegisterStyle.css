@@ -31,3 +31,44 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+h2 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.input-group {
+	margin-bottom: 15px;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #99B080;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background: #99B080;
+	color: white;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: #748E63;
+}
