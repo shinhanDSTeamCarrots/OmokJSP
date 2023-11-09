@@ -1,77 +1,89 @@
 @charset "UTF-8";
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #BA94D1;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: url('../img/carrot.jpg');
+	font-family: Arial, sans-serif;
+	background-color: #BA94D1;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: url('../img/carrot.jpg');
 }
 
 .container {
-    text-align: center;
-    border-radius: 5vw;
-    padding: 5vw;
-    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
-    height: 60vh;
-    width: 40vw;
-    background-color: #F9B572;
-    margin: auto;
+	text-align: center;
+	border-radius: 5vw;
+	padding: 5vw;
+	box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
+	height: 60vh;
+	width: 40vw;
+	background-color: #F9B572;
+	margin: auto;
 }
-
-.form {
-    width: 20vw;
-    height: 50vh;
-    margin: auto;
-    box-sizing: border-box;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.what {
-	 display: flex;
-	 
-}
-#Input {
-	
-    font-size: 1rem; /* 글자 크기 조정 */
-    padding: 10px 15px; /* 내부 여백 조정 */
-    margin: 5px; /* 요소 외부의 여백 */
-}
-
-
-
-.title {
-    width: 150px;
-    height: 150px;
-    margin: 50px auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
 .image {
-    width: 100px;
+    width: 80px;
     height: auto;
-    margin: 20px;
+    margin: 10px;
+}
+.login-container {
+	padding: 20px;
+	height: 45vh;
+	width: 35vw;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.container > #button{
-    margin: 15px 0;
+h2 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
 }
-.container > #button > button{
-    background-color: #DEBACE;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 10px 10px;
-    height: 5vh;
-    width: 10vw;
-    cursor: pointer;
+
+.input-group {
+	margin-bottom: 15px;
 }
-.container > #button > button:hover {
-    background-color: #BA94D1;
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #009688;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background: #009688;
+	color: white;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: #00796b;
+}
+
+.login-footer {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.login-footer a {
+	color: #009688;
+	text-decoration: none;
 }
