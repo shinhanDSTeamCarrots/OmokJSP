@@ -48,18 +48,21 @@
 
 <body>
 	<div class="container">
-		<div class="form">
-			<div id="title"></div>
-			<div>
-				<form method="post">
-					<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
-					<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" /><br>
-					<div id="button">
-						<input type="button" value="로그인" onclick="whenLoginClick()" /><br>
-						<input type="button" onclick="whenRegistClicked()" value="회원가입" />
-					</div>
-				</form>
-			</div>
+		<div class="title">
+		    <img src="../img/O.png" alt="Image 1" class="image">
+		    <img src="../img/M.png" alt="Image 2" class="image">
+		    <img src="../img/O.png" alt="Image 3" class="image">
+		    <img src="../img/K.png" alt="Image 3" class="image">
+		</div>
+		<div>
+			<form method="post">
+				<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
+				<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" /><br>
+				<div id="button">
+					<input type="button" value="로그인" onclick="whenLoginClick()" /><br>
+					<input type="button" onclick="whenRegistClicked()" value="회원가입" />
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
