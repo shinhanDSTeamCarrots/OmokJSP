@@ -48,16 +48,18 @@
 
 <body>
 	<div class="container">
-		<div class="b1">
-			<h1>오목게임</h1>
-			<br>
-			<form method="post">
-				<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
-				<input type="password" name="loginPw" id="loginPw"
-					placeholder="비밀번호" /><br> <input type="button" value="로그인"
-					onclick="whenLoginClick()" /><br> <input type="button"
-					onclick="whenRegistClicked()" value="회원가입" />
-			</form>
+		<div class="form">
+			<div id="title"></div>
+			<div>
+				<form method="post">
+					<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
+					<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" /><br>
+					<div id="button">
+						<input type="button" value="로그인" onclick="whenLoginClick()" /><br>
+						<input type="button" onclick="whenRegistClicked()" value="회원가입" />
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

@@ -7,21 +7,27 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('../img/carrot.jpg')
+    background: url('../img/carrot.jpg');
 }
+
 .container {
     text-align: center;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5vw;
+    padding: 5vw;
+    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
     height: 60vh;
     width: 40vw;
     background-color: #F9B572;
+    margin: auto;
 }
+
 .form {
-	width: 350px;
-	height: 350px;
-	border: 1px solid #000;
-	box-sizing: border-box;
-	text-align: center;
+    width: 20vw;
+    height: 50vh;
+    margin: auto;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
