@@ -31,7 +31,6 @@
 	width: 28px;
     height: 28px;
     position: absolute;
-    background: radial-gradient(circle at center, #4e4e4e 0%, #000000 100%);
 	border-radius: 50%;
 	transform: translate(-50%, -50%);
 }

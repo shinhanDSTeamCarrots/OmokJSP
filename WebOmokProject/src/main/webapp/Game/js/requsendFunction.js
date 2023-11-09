@@ -44,10 +44,10 @@ function sendMyInfo(){
 			
 			if(success){
 				if(message == "T"){
-					//보드에 오목알출력
+					stone(x, y, "black");
 				}
 				if(message == "W"){
-					//보드에 오목알출력
+					stone(x, y, "black");
 					alert("승리");
 				}		
 			} else if(success == "false"){
