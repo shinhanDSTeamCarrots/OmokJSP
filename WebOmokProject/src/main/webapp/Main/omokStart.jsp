@@ -63,12 +63,12 @@
 			</div>
 			<div class="login-container">
 				<div class="input-group">
-					<label for="loginId" value="Username">Username</label>
-					<input type="text" id="loginId" name="loginId" required>
+					<label for="loginId" value="Username">Username
+					<input type="text" id="loginId" name="loginId" required></label>
 				</div>
 				<div class="input-group">
-					<label for="loginPw">Password</label>
-					<input type="password" id="loginPw" name="loginPw" required>
+					<label for="loginPw">Password
+					<input type="password" id="loginPw" name="loginPw" required></label>
 				</div>
 				<div id="button">
 					<button type="submit" class="btn" onclick="whenLoginClick()">Sign In</button>
