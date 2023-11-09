@@ -41,7 +41,7 @@
             console.log("ajax 성공");
             if (msg == "T") {
               //FLAGS "방으로"
-              window.self.location = "/omokRegister.jsp";
+              window.self.location = "${contextPath}/room/listRoom.jsp";
             } else {
               alert("로그인에 실패했습니다 ㅠㅠ");
             }

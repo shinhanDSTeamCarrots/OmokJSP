@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
 <title>Insert title here</title>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"  />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../css/omokRegisterStyle.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	console.log("왜 시바 안되냐");
 	function check() {
@@ -34,6 +37,7 @@
 			alert("이름을 입력해 주세요.");
 			return;
 		}
+		console.log("회원가입 통신 시작");
 
 		$.ajax({
 			type : "post",
@@ -48,14 +52,10 @@
 				"nicknm" : nicknm.value.trim()
 			},
 			success : function(msg) {
+				console.log("회원가입 성공");
 				//회원가입 완료
 				alert("회원가입이 성공하였습니다.");
-			},
-			error : function(msg) {
-				alert("에러가 발생했습니다.")
-			},
-			complete : function(msg) {
-				alert("작업을 완료했습니다.")
+              	window.self.location = "${contextPath}/Main/omokStart.jsp";
 			}
 		});
 	}
@@ -65,6 +65,7 @@
 			alert("ID를 입력하세요");
 			return;
 		}
+		console.log("중복확인 체크");
 		$.ajax({
 			type : "post",
 			async : false,
@@ -74,17 +75,12 @@
 				"id" : id.trim()
 			},
 			success : function(msg) {
+				console.log("중복확인 체크 성공");
 				if (msg == "T") {
 					alert("사용할 수 있는 아이디입니다.");
 				} else {
 					alert("사용할 수 없는 아이디입니다.");
 				}
-			},
-			error : function(msg) {
-				alert("에러가 발생했습니다.");
-			},
-			complete : function(msg) {
-				alert("작업을 완료했습니다.");
 			}
 		});
 	}
