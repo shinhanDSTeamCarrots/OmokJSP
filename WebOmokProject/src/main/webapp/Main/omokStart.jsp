@@ -47,7 +47,7 @@
 </head>
 
 <body>
-	<div id="wrap">
+	<div class="container">
 		<div class="b1">
 			<h1>오목게임</h1>
 			<br>
