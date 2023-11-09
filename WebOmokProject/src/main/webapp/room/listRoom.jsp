@@ -8,13 +8,8 @@
 <%!List<Map<String, Object>> memberWinRates = new ArrayList<>();%>
 <%
 MemberVO myvo = (MemberVO) request.getSession().getAttribute("myvo");
-
 String member_id = myvo.getMember_id();
-System.out.println(member_id);
-RankDAO rankDAO = new RankDAO();
-memberWinRates = rankDAO.getAllMemberWinRates();
 
-System.out.println(memberWinRates.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -22,9 +17,9 @@ System.out.println(memberWinRates.size());
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>방 대기 화면</title>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/listRoomCss.css">
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 	<h1>게임 대기 방</h1>
@@ -165,7 +160,7 @@ System.out.println(memberWinRates.size());
 			}
 			console.log("ajax 시작!");
 			$.ajax({
-		          url: "${contextPath}/room/addRoom.do",
+		          url: "${contextPath}/roomController/addRoom.do",
 		          type: "POST",
 		          async: "false",
 		          dataType: "text",
