@@ -27,11 +27,15 @@
 	href="${pageContext.request.contextPath }/css/listRoomCss.css">
 </head>
 <body>
-	<h1>게임 대기 방</h1>
+	<div id="miniTitle">
+				<img src="../img/omoktitle.png" alt="Image 1" class="image">
+	</div>
 	<div id="container">
 		<input type="button" id="refreshBtn" class="refreshBtn" src="../img/refresh.png" onclick="getRoomList()" width="10px"/>
 		<!-- 방 만들기 버튼 -->
-		<button id="createRoomButton">방 만들기</button>
+		<div class="buttonplace" >
+			<button id="createRoomButton">방 만들기</button>
+		</div>
 
 		<!-- 방 목록 -->
 		<div class="room-list"
@@ -249,7 +253,6 @@
 		$(window).ready(function(){
 			getRoomList();
 		})
-		
     </script>
 </body>
 </html>
