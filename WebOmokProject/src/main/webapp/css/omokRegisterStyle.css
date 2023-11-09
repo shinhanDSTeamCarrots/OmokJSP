@@ -1,18 +1,24 @@
 @charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    margin: 30px;
-    padding: 0;
-    background-color: #f0f0f0;
+    background-color: #BA94D1;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../img/carrot.jpg')
 }
-#wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
+.container {
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    height: 60vh;
+    width: 40vw;
+    background-color: #F9B572;
 }
-
-.b1 {
+.form {
 	width: 350px;
 	height: 350px;
 	border: 1px solid #000;
