@@ -4,7 +4,11 @@
 <%@ page import= "Member.MemberVO" %>
 <%
 	MemberVO myvo=(MemberVO)request.getSession().getAttribute("myvo");
-	String member_id= myvo.getMember_id();
+	if (myvo == null) {
+	    System.out.println("myvo is empty.");
+	} else {
+    String member_id = myvo.getMember_id();
+}
 %>
 <!DOCTYPE html>
 <html>

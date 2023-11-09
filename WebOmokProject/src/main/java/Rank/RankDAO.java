@@ -50,44 +50,34 @@ public class RankDAO {
 			e.printStackTrace();
 		}
 	}
-	//membervo에서 memberno기준으로 memberid 찾는거
-	public String notoid(int member_no) {
-		String findid=null;
-		try {
-			con=dataFactory.getConnection();
-			String query = "SELECT MEMBER_ID FROM MEMBER_TB WHERE MEMBER_NO = ?";
-			pstmt=con.prepareStatement(query);
-			pstmt.setInt(1, member_no);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				findid=rs.getString("member_id");
-			}
-			pstmt.close();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return findid;
-	}
 	
 	
-	//승률계산
-	public Map<Integer, Double> winRate(int member_no) {
+	// 승률계산 memberno별 memberid, wincnt, losecnt, winrate 
+	public Map<Integer, Object> winRate(int member_no) {
 		Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         
-        Map<Integer, Double> result = new HashMap<>();
+        Map<Integer, Object> result = new HashMap<>();
         
 		try {
 			con=dataFactory.getConnection();
-						
+			
+			String query = "SELECT MEMBER_ID FROM MEMBER_TB WHERE MEMBER_NO = ?";
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, member_no);
+			rs=pstmt.executeQuery();
+			rs.next();
+			String memberId=rs.getString("MEMBER_ID");
+			result.put(0, memberId);
+			
 			String winquery="SELECT COUNT(WINNER_NO) AS WIN_CNT FROM LOG_TB WHERE WINNER_NO=?";
 			pstmt=con.prepareStatement(winquery);		
 			pstmt.setInt(1, member_no);
 			rs=pstmt.executeQuery();
 			rs.next();
 			int winCnt=rs.getInt("WIN_CNT");
-			result.put(1, (double) winCnt);
+			result.put(1, winCnt);
 			
 			String losequery="SELECT COUNT(LOSER_NO) AS LOSE_CNT FROM LOG_TB WHERE LOSER_NO=?";
 			pstmt=con.prepareStatement(losequery);		
@@ -95,7 +85,7 @@ public class RankDAO {
 			rs=pstmt.executeQuery();
 			rs.next();
 			int loseCnt=rs.getInt("LOSE_CNT");
-			result.put(2, (double) loseCnt);
+			result.put(2, loseCnt);
 			
 			double winRate=0.0;
 			if(winCnt + loseCnt > 0) {
@@ -123,7 +113,7 @@ public class RankDAO {
 		
 		return result;
 	}
-	//memberno기준으로 승률과 memerid찾아서 띄우기
+
 	
 
 }
