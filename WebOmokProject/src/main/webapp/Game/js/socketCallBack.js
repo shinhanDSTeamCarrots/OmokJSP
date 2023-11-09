@@ -2,17 +2,18 @@
  * 
  */
  
- //room_id, member_no 불러오기
+//room_id, member_no 불러오기
 //member_no > request로 받기
 
-var stonInfoCallBack = function(stone, row, col){
-	var x = row;
-	var y = col;
+let stonInfoCallBack = function(stone, row, col){
+	let x = row;
+	let y = col;
 	
 	console.log("착수 콜백 함수");
 	sendYouInfo();
+	stone(x, y, "white");
 };
-var sysCallback = function(type,content){
+let sysCallback = function(type,content){
     console.log("시스템 콜백 함수");
     
     if(type == "TIME"){

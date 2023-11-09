@@ -36,8 +36,8 @@ public class Omok extends HttpServlet {
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
-		
 	
+        
 		// 1. 내가 돌을 가져왓을때
 		if (command.equals("sendMyInfo.do")) {
 			myStoneSet(request, response);

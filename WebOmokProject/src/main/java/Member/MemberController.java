@@ -1,6 +1,7 @@
 package Member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -34,16 +35,33 @@ public class MemberController extends HttpServlet {
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nextPage = null;
 		String action = request.getPathInfo();
 		System.out.println("action: "+action);
-		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		System.out.println("==========doHandle in MemberController Called=============");
 		//아이디 중복 여부
 		if("/duplicateMember.do".equals(action)) {
-			request.setAttribute("msg", "T");
-		} else if(!"/duplicateMember.do".equals(action)) { //사용 중인 아이디
-			request.setAttribute("msg", "F");
+			System.out.println("==========id 중복 체크=============");
+			//아이디를 먼저 받아온다
+			String id = (String) request.getParameter("id");
+			//아이디로 중복 검사를 한다
+			boolean isdup = memberService.duplicateMember(id);
+			//그 값에 따라 T F 를 보낸다.
+			System.out.println("==========id 중복 체크=============");
+			if(isdup) {
+				//중복임
+				writer.print("F");
+				return;
+			}
+			else {
+				//중복 아님
+				writer.print("T");
+				return;
+			}
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
+			System.out.println("==========joinmeber=============");
 			//비밀번호 암호화
 			String hashedPwd = hashPassword(request.getParameter("signPw"));
 			
@@ -51,12 +69,14 @@ public class MemberController extends HttpServlet {
 			
 			memberVO.setMember_id(request.getParameter("signId"));
 			memberVO.setMember_pw(hashedPwd);
-			memberVO.setMember_nicknm(request.getParameter("signName"));
+			memberVO.setMember_nm(request.getParameter("signName"));
+			memberVO.setMember_nicknm(request.getParameter("nicknm"));
 			memberVO.setEmail(request.getParameter("signEmail"));
 			memberService.joinMember(memberVO);
-
-			nextPage = "/WebOmokProject/.jsp"; //로그인 페이지로 이동
+			System.out.println("==========joinmeber=============");
+			return;
 		} else if("/loginMember.do".equals(action)) { //로그인
+			System.out.println("==========logined=============");
 			//비밀번호 암호화
 			String hashedPwd = hashPassword(request.getParameter("loginPw"));
 			
@@ -64,21 +84,22 @@ public class MemberController extends HttpServlet {
 			
 			memberVO.setMember_id(request.getParameter("loginId"));
 			memberVO.setMember_pw(hashedPwd);
-			memberService.loginMember(memberVO);
-
-			
-			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
-		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
-			request.setAttribute("msg", "F");
+			MemberVO logined = memberService.loginMember(memberVO);
+			if(logined == null) {
+				//로그인 실패
+				writer.print("F");
+			}
+			else {
+				HttpSession session = request.getSession();
+				session.setAttribute("myvo", logined);
+				writer.print("T");
+				//로그인 성공
+			}
+			System.out.println("==========logined=============");
+			return;
 		}
 	}
-	
-	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVO memberVO = memberService.loginMember(null);
-		HttpSession session = request.getSession();
-		session.setAttribute("myvo", memberVO);
-	}
-	
+		
 	//비밀번호 암호화
 	private String hashPassword(String password) {
         try {
