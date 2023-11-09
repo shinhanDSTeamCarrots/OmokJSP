@@ -27,10 +27,17 @@ System.out.println(memberWinRates.size());
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
-	<h1>게임 대기 방</h1>
+	<div id="miniTitle">
+				<img src="../img/O.png" alt="Image 1" class="image">
+				<img src="../img/M.png" alt="Image 2" class="image">
+				<img src="../img/O.png" alt="Image 3" class="image">
+				<img src="../img/K.png" alt="Image 3" class="image">
+	</div>
 	<div id="container">
 		<!-- 방 만들기 버튼 -->
-		<button id="createRoomButton">방 만들기</button>
+		<div class="buttonplace" >
+			<button id="createRoomButton">방 만들기</button>
+		</div>
 
 		<!-- 방 목록 -->
 		<div class="room-list"
@@ -114,7 +121,7 @@ System.out.println(memberWinRates.size());
 							value="생성"> <input type="button" id="cancelButton"
 							value="취소"></td>
 					</tr>
-				</table>ㄴ
+				</table>
 		</div>
 		</form>
 
@@ -183,9 +190,7 @@ System.out.println(memberWinRates.size());
 		            }
 		          }
 		        });
-		      });
-		
-		
+		      });				
     </script>
 </body>
 </html>
