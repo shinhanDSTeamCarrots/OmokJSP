@@ -27,3 +27,11 @@
     position: absolute;
     margin : 25px;
 }
+.stone{
+	width: 22px;
+    height: 22px;
+    position: absolute;
+    margin : 2px;
+    background: radial-gradient(circle at center, #4e4e4e 0%, #000000 100%);
+	border-radius: 50%;
+}

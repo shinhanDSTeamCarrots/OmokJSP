@@ -5,6 +5,15 @@ function stoneInfo(e){
 	let y = Math.round(e.offsetY/28);
 	//좌표값 콘솔 출력
 	console.log("X: "+x+", "+"Y: "+y);
+	
+	//돌 표기
+	let stoneDiv = document.createElement("div");
+	stoneDiv.className = "stone";
+	stoneDiv.style.left = x*28 + "px"; // X 좌표에 따라 위치 설정
+	stoneDiv.style.top = y*28 + "px"; // Y 좌표에 따라 위치 설정
+	
+	//body에 요소 추가
+	document.body.appendChild(stoneDiv);
 }
 
 /*나가기 버튼 클릭 시, 대기방으로 이동*/

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>오목 게임</title>
-<link rel="stylesheet" type="text/css" href="../Game/CSS/omokPlayStyle.css">
+	<meta charset="UTF-8">
+	<title>오목 게임</title>
+	<link rel="stylesheet" type="text/css" href="../Game/CSS/omokPlayStyle.css">
 </head>
 <body>
     <div class="game_container">
