@@ -8,6 +8,7 @@
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="../css/omokRegisterStyle.css">
 <title>회원가입</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	function check() {
 		let id = document.getElementById('id');
