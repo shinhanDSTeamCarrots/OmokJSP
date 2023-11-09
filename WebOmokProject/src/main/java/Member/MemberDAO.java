@@ -60,7 +60,7 @@ public class MemberDAO {
 			pstmt.setString(1, memberVO.getMember_id());
 			pstmt.setString(2, memberVO.getMember_pw());
 			pstmt.setString(3, memberVO.getMember_nicknm());
-			pstmt.setString(4, memberVO.getEmail())
+			pstmt.setString(4, memberVO.getEmail());
 
 			pstmt.executeUpdate(); // 데이터베이스에 해당 SQL 쿼리가 실행
 			pstmt.close();
