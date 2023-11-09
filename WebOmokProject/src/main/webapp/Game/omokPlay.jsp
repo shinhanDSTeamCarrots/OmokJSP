@@ -121,7 +121,8 @@ body {
         </div>
     </div>
     <script src="js/omokPlayEvent.js"></script>
+    <script src="js/SocketControll.js"></script>
     <script src="js/requSendFunction.js"></script>
-    <script src="SocketControll.js"></script>
+    <script src="js/socketCallBack.js"></script>
 </body>
 </html>
