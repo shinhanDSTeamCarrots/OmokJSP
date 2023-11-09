@@ -21,10 +21,11 @@ body {
 	background-color: #F9B572;
 	margin: auto;
 }
+
 .image {
-    width: 80px;
-    height: auto;
-    margin: 10px;
+	width: 80px;
+	height: auto;
+	margin: 10px;
 }
 
 .login-container {
@@ -38,12 +39,6 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: #FAF8ED;
-}
-
-h2 {
-	text-align: center;
-	color: #333;
-	margin-bottom: 20px;
 }
 
 .input-group {
@@ -64,7 +59,7 @@ h2 {
 
 .input-group input:focus {
 	outline: none;
-	border-color: #009688;
+	border-color: #99B080;
 }
 
 .btn {
@@ -72,13 +67,13 @@ h2 {
 	padding: 10px;
 	border: none;
 	border-radius: 4px;
-	background: #009688;
+	background: #99B080;
 	color: white;
 	cursor: pointer;
 }
 
 .btn:hover {
-	background: #00796b;
+	background: #748E63;
 }
 
 .login-footer {
@@ -87,6 +82,6 @@ h2 {
 }
 
 .login-footer a {
-	color: #009688;
+	color: #99B080;
 	text-decoration: none;
 }

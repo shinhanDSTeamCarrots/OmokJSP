@@ -88,16 +88,30 @@
 	<div class="container">
 		<div class="form">
 			<form method="post" action="${contextPath}/Member/joinMember.do">
-				<h1>회원가입</h1>
-				<input type="text" name="signId" id="id" placeholder="아이디">
-				<input type="button" id="btn_duplicate" value="중복확인"
-					onClick="idCheck()" /><br> <input type="password"
-					name="signPw" id="pwd" placeholder="비밀번호"><br> <input
-					type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"><br>
-				<input type="text" name="signName" id="name" placeholder="이름"><br>
-				<input type="text" name="nicknm" id="nicknm" placeholder="닉네임"><br>
-				<input type="email" name="signEmail" id="email" placeholder="이메일"><br>
-				<input type="submit" value="가입하기" onClick="check()">
+				<div class="input-group">
+				    <h2>회원가입</h2>
+				
+				    <label for="id">아이디</label>
+				    <input type="text" name="signId" id="id" placeholder="아이디">
+				    <input type="button" id="btn_duplicate" value="중복확인" onClick="idCheck()" /><br>
+				    
+				    <label for="pwd">비밀번호</label>
+				    <input type="password" name="signPw" id="pwd" placeholder="비밀번호"><br>
+				
+				    <label for="checkPwd">비밀번호 확인</label>
+				    <input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"><br>
+				
+				    <label for="name">이름</label>
+				    <input type="text" name="signName" id="name" placeholder="이름"><br>
+				
+				    <label for="nicknm">닉네임</label>
+				    <input type="text" name="nicknm" id="nicknm" placeholder="닉네임"><br>
+				
+				    <label for="email">이메일</label>
+				    <input type="email" name="signEmail" id="email" placeholder="이메일"><br>
+				
+				    <input type="submit" value="가입하기" onClick="check()">
+				</div>
 			</form>
 		</div>
 	</div>
