@@ -81,20 +81,25 @@ public class MemberDAO {
 
 			pstmt.setString(1, memberVO.getMember_id());
 			pstmt.setString(2, memberVO.getMember_pw());
-			ResultSet rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				result = new MemberVO();
-				result.setMember_no(rs.getInt("member_no"));
-				result.setMember_id(rs.getString("member_id"));
-				result.setMember_nm(rs.getString("member_nm"));
-				result.setJoin_date(rs.getDate("join_date"));
-				result.setEmail(rs.getString("email"));
-			}
-			else {
+			try {
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					result = new MemberVO();
+					result.setMember_no(rs.getInt("member_no"));
+					result.setMember_id(rs.getString("member_id"));
+					result.setMember_nm(rs.getString("member_nm"));
+					result.setJoin_date(rs.getDate("join_date"));
+					result.setEmail(rs.getString("email"));
+				}
+				else {
+					result = null;
+				}
+				pstmt.close();
+				return result;
+			}catch(Exception e) {
 				return null;
 			}
-			pstmt.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

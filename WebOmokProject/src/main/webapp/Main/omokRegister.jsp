@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="../css/omokRegisterStyle.css">
-<title>회원가입</title>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="../css/omokRegisterStyle.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
+<script type="text/javascript">
+	console.log("왜 시바 안되냐");
 	function check() {
 		let id = document.getElementById('id');
 		let pwd = document.getElementById('pwd');
@@ -40,16 +41,15 @@
 			url : "${contextPath}/member/joinMember.do",
 			dataType : "text",
 			data : {
-				"signId" : id,
-				"signPw" : pwd,
-				"signName" : name,
-				"signEmail" : email,
-				"nicknm" : nicknm
+				"signId" : id.value.trim(),
+				"signPw" : pwd.value.trim(),
+				"signName" : name.value.trim(),
+				"signEmail" : email.value.trim(),
+				"nicknm" : nicknm.value.trim()
 			},
 			success : function(msg) {
 				//회원가입 완료
 				alert("회원가입이 성공하였습니다.");
-				<jsp:forward page="/omokStart.jsp"/>
 			},
 			error : function(msg) {
 				alert("에러가 발생했습니다.")
@@ -59,7 +59,6 @@
 			}
 		});
 	}
-
 	function idCheck() {
 		let id = $("#id").val();
 		if (id.trim() == "") {
@@ -72,7 +71,7 @@
 			url : "${contextPath}/member/duplicateMember.do",
 			dataType : "text",
 			data : {
-				"id" : id
+				"id" : id.trim()
 			},
 			success : function(msg) {
 				if (msg == "T") {

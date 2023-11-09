@@ -29,13 +29,13 @@
         console.log("ajax 시작");
         console.log("context: "+"${contextPath}");
         $.ajax({
-          url: "http://localhost:8090/${contextPath}/member/loginMember.do",
+          url: "${contextPath}/member/loginMember.do",
           type: "POST",
           async: "false",
           dataType: "text",
           data: {
-            loginId: id,
-            loginPw: pwd
+            loginId: id.value.trim(),
+            loginPw: pwd.value.trim()
           },
           success: function (msg) {
             console.log("ajax 성공");
@@ -50,7 +50,7 @@
       }
 
       function whenRegistClicked() {
-        window.self.location = "/omokRegister.jsp";
+        window.self.location = "${contextPath}/Main/omokRegister.jsp";
       }
     </script>
 </head>
