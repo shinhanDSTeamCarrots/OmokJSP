@@ -1,6 +1,8 @@
 package Member;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -43,21 +45,25 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("msg", "F");
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
 			//비밀번호 암호화
+			String hashedPwd = hashPassword(request.getParameter("signPw"));
 			
 			MemberVO memberVO = new MemberVO();
 			
 			memberVO.setMember_id(request.getParameter("signId"));
-			memberVO.setMember_pw(request.getParameter("signPw"));
+			memberVO.setMember_pw(hashedPwd);
 			memberVO.setMember_nicknm(request.getParameter("signName"));
 			memberVO.setEmail(request.getParameter("signEmail"));
 			memberService.joinMember(memberVO);
 
 			nextPage = "/WebOmokProject/.jsp"; //로그인 페이지로 이동
 		} else if("/loginMember.do".equals(action)) { //로그인
+			//비밀번호 암호화
+			String hashedPwd = hashPassword(request.getParameter("loginPw"));
+			
 			MemberVO memberVO = new MemberVO();
 			
 			memberVO.setMember_id(request.getParameter("loginId"));
-			memberVO.setMember_pw(request.getParameter("loginPw"));
+			memberVO.setMember_pw(hashedPwd);
 			memberService.loginMember(memberVO);
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
@@ -71,11 +77,24 @@ public class MemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("myvo", memberVO);
 	}
-	//비밀번호 암호화 함수 추가
-//	// 비밀번호 암호화
-//	String _pwd = memberVO.getMember_pw();
-//	MessageDigest md = MessageDigest.getInstance();
-//	md.update(_pwd.getBytes());
-//	String hex = String.format("%064x", new BigInteger(1, md.digest()));
+	
+	//비밀번호 암호화
+	private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
 
+            // 바이트 배열을 16진수 문자열로 변환
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashedBytes) {
+                String hex = String.format("%02x", b);
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
