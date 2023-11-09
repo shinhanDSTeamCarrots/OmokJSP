@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import= "Member.MemberVO" %>
 <%@ page import="Rank.RankDAO"%>
-<%@ page import= "Member.MemberVO" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%! List<Map<String, Object>> memberWinRates = new ArrayList<>(); %>
 <%
 	MemberVO myvo=(MemberVO)request.getSession().getAttribute("myvo");
 	if (myvo == null) {
 	    System.out.println("myvo is empty.");
 	} else {
-    String member_id = myvo.getMember_id();
-}
+    	String member_id = myvo.getMember_id();
+    }
+	RankDAO rankDAO = new RankDAO();
+    memberWinRates = rankDAO.getAllMemberWinRates();
+   
+    System.out.println(memberWinRates.size());
+    
+
 %>
 <!DOCTYPE html>
 <html>
@@ -34,19 +44,13 @@
 		            	<th>생성자</th>
 		            	<th>방 이름</th>
 		            	<th>방 생성일</th>
+		            	<th>참여자</th>
 	            	</tr>
 	            	
 	            	
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
 	            	<!-- 방이름 클릭시 게임페이지로 이동 -->
-					<c:forEach var="room" items="${listRoom }">
-					<tr align="center">
-						<td>${room.OWNER_ID }</td>
-						<td>${room.JOINED_NO }</td>
-						<td><a href="omokPlay.jsp">${room.ROOM_NM }</td>
-						<td>${room.CREATED_DATE }</a></td>							
-					</tr>
-					</c:forEach>	            
+						            
 	            </table>
 	        </div>
 	    </div>	  
@@ -62,10 +66,10 @@
 		            </tr>
 		            <!-- RankDAO로 값 넣어주기 -->
 		            
-		            <c:forEach items="${userRank}" var="userRank">
+		            <c:forEach var="memberWinRate" items="${memberWinRates }">
 		                <tr>
-		                    <td>${userRank.memberId}</td>
-		                    <td>${userRank.winRate}</td>
+		                    <td><c:out value="${memberWinRate['MEMBER_ID']}" /></td>
+		                    <td><c:out value="${memberWinRate['WINRATE']}" /></td>
 		                </tr>
 		            </c:forEach>
 		        </table>
@@ -77,14 +81,15 @@
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">			
 			
-			<form id="createRoomForm">
+			<form id="createRoomForm" method="post">
 	        <h2>방 만들기</h2>
 	        
 	        <table align="center">
 	        <!-- 생성자 아이디 받아와서 넣어주기 -->
 			<tr>
 				<td width="200"><p align="right">생성자</p></td>
-				<td width="400"><input type="hidden" name="OWNER_ID" id ="ownerIdField" value="<%= member_id %>"></td>
+				<td width="400"><input type="hidden" name="OWNER_ID" id ="ownerIdField" ></td> 
+				
 			</tr>
 			<tr>
 				<td width="200"><p align="right">방 이름</p></td>
