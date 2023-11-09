@@ -32,6 +32,20 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.what {
+	 display: flex;
+	 
+}
+#Input {
+	
+    font-size: 1rem; /* 글자 크기 조정 */
+    padding: 10px 15px; /* 내부 여백 조정 */
+    margin: 5px; /* 요소 외부의 여백 */
+}
+
+
+
 .title {
     width: 150px;
     height: 150px;
