@@ -5,6 +5,21 @@ function stoneInfo(e){
 	let y = Math.round(e.offsetY/28);
 	//좌표값 콘솔 출력
 	console.log("X: "+x+", "+"Y: "+y);
+	console.log("X: "+e.offsetX+", "+"Y: "+e.offsetY);	
+	
+	
+	//-----------------돌 배치 테스트-------------------
+	//돌 표기
+	let stoneDiv = document.createElement("div");
+	stoneDiv.className = "stone";
+	stoneDiv.style.top = y*28 + "px"; // Y 좌표에 따라 위치 설정
+	stoneDiv.style.left = x*28 + "px"; // X 좌표에 따라 위치 설정
+	
+	// <div id="board"> 요소 내에 돌을 추가
+    let boardDiv = document.getElementById("board");
+    if (boardDiv) {
+        boardDiv.appendChild(stoneDiv);
+    }
 }
 
 /*나가기 버튼 클릭 시, 대기방으로 이동*/

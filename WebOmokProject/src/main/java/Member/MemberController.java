@@ -1,6 +1,8 @@
 package Member;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -38,32 +40,36 @@ public class MemberController extends HttpServlet {
 		
 		//아이디 중복 여부
 		if("/duplicateMember.do".equals(action)) {
-			request.setAttribute("msg", "사용할 수 있는 아이디입니다.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "T");
 		} else if(!"/duplicateMember.do".equals(action)) { //사용 중인 아이디
-			request.setAttribute("msg", "이미 사용 중인 아이디입니다.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "F");
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
+			//비밀번호 암호화
+			String hashedPwd = hashPassword(request.getParameter("signPw"));
+			
 			MemberVO memberVO = new MemberVO();
-
-			memberVO.setMember_id(request.getParameter(""));
-			memberVO.setMember_nicknm(request.getParameter(""));
-			memberVO.setEmail(request.getParameter(""));
+			
+			memberVO.setMember_id(request.getParameter("signId"));
+			memberVO.setMember_pw(hashedPwd);
+			memberVO.setMember_nicknm(request.getParameter("signName"));
+			memberVO.setEmail(request.getParameter("signEmail"));
 			memberService.joinMember(memberVO);
 
 			nextPage = "/WebOmokProject/.jsp"; //로그인 페이지로 이동
 		} else if("/loginMember.do".equals(action)) { //로그인
+			//비밀번호 암호화
+			String hashedPwd = hashPassword(request.getParameter("loginPw"));
+			
 			MemberVO memberVO = new MemberVO();
 			
-			memberVO.setMember_id(request.getParameter(""));
-			memberVO.setMember_pw(request.getParameter(""));
+			memberVO.setMember_id(request.getParameter("loginId"));
+			memberVO.setMember_pw(hashedPwd);
 			memberService.loginMember(memberVO);
 
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
 		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
-			request.setAttribute("msg", "아이디, 비밀번호를 확인해주세요.");
-			nextPage = "/WEB-INF/view/common/alert.jsp";
+			request.setAttribute("msg", "F");
 		}
 	}
 	
@@ -73,4 +79,23 @@ public class MemberController extends HttpServlet {
 		session.setAttribute("myvo", memberVO);
 	}
 	
+	//비밀번호 암호화
+	private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+
+            // 바이트 배열을 16진수 문자열로 변환
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashedBytes) {
+                String hex = String.format("%02x", b);
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -51,12 +51,7 @@ public class MemberDAO {
 
 	// 사용자 추가
 	public void addMember(MemberVO memberVO) {
-//		// 비밀번호 암호화
-//		String _pwd = memberVO.getMember_pw();
-//		MessageDigest md = MessageDigest.getInstance("SHA-256");
-//		md.update(_pwd.getBytes());
-//		String hex = String.format("%064x", new BigInteger(1, md.digest()));
-
+		
 		try {
 			con = dataFactory.getConnection();
 			String query = "INSERT INTO MEMBER_TB (member_no,member_id,hex,member_nm,email) VALUES(?,?,?,?,?)";
@@ -79,12 +74,6 @@ public class MemberDAO {
 	// 사용자 존재 여부 확인 및 확인되면 사용자 정보 result에 저장
 	public MemberVO isExisted(MemberVO memberVO) {
 		MemberVO result = null;
-
-//		// 비밀번호 암호화
-//		String _pwd = memberVO.getMember_pw();
-//		MessageDigest md = MessageDigest.getInstance("SHA-256");
-//		md.update(_pwd.getBytes());
-//		String hex = String.format("%064x", new BigInteger(1, md.digest()));
 
 		try {
 			con = dataFactory.getConnection();
