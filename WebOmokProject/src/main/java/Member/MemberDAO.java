@@ -51,22 +51,17 @@ public class MemberDAO {
 
 	// 사용자 추가
 	public void addMember(MemberVO memberVO) {
-		// 비밀번호 암호화
-		String _pwd = memberVO.getMember_pw();
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		md.update(_pwd.getBytes());
-		String hex = String.format("%064x", new BigInteger(1, md.digest()));
-
+		
 		try {
 			con = dataFactory.getConnection();
 			String query = "INSERT INTO MEMBER_TB (member_no,member_id,hex,member_nm,email) VALUES(?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setInt(1, member_no); //변경해야함!!
-			pstmt.setString(2, member_id);
-			pstmt.setString(3, hex);
-			pstmt.setString(4, member_nm);
-			pstmt.setString(6, email);
+			pstmt.setInt(1,memberVO.getMember_no()); //변경해야함!!
+			pstmt.setString(2, memberVO.getMember_id());
+			pstmt.setString(3, memberVO.getMember_pw());
+			pstmt.setString(4, memberVO.getMember_nicknm());
+			pstmt.setString(6, memberVO.getEmail());
 
 			pstmt.executeUpdate(); // 데이터베이스에 해당 SQL 쿼리가 실행
 			pstmt.close();
@@ -79,12 +74,6 @@ public class MemberDAO {
 	// 사용자 존재 여부 확인 및 확인되면 사용자 정보 result에 저장
 	public MemberVO isExisted(MemberVO memberVO) {
 		MemberVO result = null;
-
-		// 비밀번호 암호화
-		String _pwd = memberVO.getMember_pw();
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		md.update(_pwd.getBytes());
-		String hex = String.format("%064x", new BigInteger(1, md.digest()));
 
 		try {
 			con = dataFactory.getConnection();

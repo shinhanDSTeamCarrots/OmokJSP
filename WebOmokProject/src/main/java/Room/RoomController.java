@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/RoomServlet")
-public class RoomServlet extends HttpServlet {
+@WebServlet("/RoomController")
+public class RoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public RoomServlet() {
+    public RoomController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +31,9 @@ public class RoomServlet extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		String action = request.getPathInfo();
+		System.out.println("action: "+action);
+		//url : ${contextPath}
 	}
 
 }

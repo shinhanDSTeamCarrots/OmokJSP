@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Rank.RankDAO"%>
+<%@ page import= "Member.MemberVO" %>
+<%
+	MemberVO myvo=(MemberVO)request.getSession().getAttribute("myvo");
+	String member_id= myvo.getMember_id();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,14 +27,22 @@
 	            <!-- 여기에 동적으로 방이 추가 -->
 	            <table>
 	            	<tr>
-		            	<th>방 번호</th>
 		            	<th>생성자</th>
 		            	<th>방 이름</th>
 		            	<th>방 생성일</th>
 	            	</tr>
-	            	<!--roomDAO받아와서 방 리스트 넣기-->
 	            	
-	            
+	            	
+	            	<!--roomDAO받아와서 방 리스트 넣기-->
+	            	<!-- 방이름 클릭시 게임페이지로 이동 -->
+					<c:forEach var="room" items="${listRoom }">
+					<tr align="center">
+						<td>${room.OWNER_ID }</td>
+						<td>${room.JOINED_NO }</td>
+						<td><a href="omokPlay.jsp">${room.ROOM_NM }</td>
+						<td>${room.CREATED_DATE }</a></td>							
+					</tr>
+					</c:forEach>	            
 	            </table>
 	        </div>
 	    </div>	  
@@ -36,35 +50,55 @@
 	    <!-- 사용자 랭크 목록 -->
 	    <div class="rank-list">
 	    	<div id="rank_wrap" style="height: 3420px;">
+	    			
 		        <table>
 		            <tr>
 		                <th>사용자</th>
-		                <th>랭크</th>
+		                <th>승률</th>
 		            </tr>
 		            <!-- RankDAO로 값 넣어주기 -->
-		            <c:forEach items="${userRankList}" var="userRank">
+		            
+		            <c:forEach items="${userRank}" var="userRank">
 		                <tr>
-		                    <td>${userRank.username}</td>
-		                    <td>${userRank.rank}</td>
+		                    <td>${userRank.memberId}</td>
+		                    <td>${userRank.winRate}</td>
 		                </tr>
 		            </c:forEach>
 		        </table>
 	        </div>
 	    </div>
     </div>
-    
+    우
 	<!-- 방생성 폼 -->
 	<div id="modal" class="modal-overlay">
-		<div class="modal-window">
-			<h2>방 만들기</h2>
+		<div class="modal-window">			
 			
 			<form id="createRoomForm">
-	        <label for="roomName">방 이름:</label>
-	        <input type="hidden" id="creatorId" name="creatorId">
-	        <input type="text" id="roomName" name="roomName" required>
-	        <br><br>
-	        <input type="submit" value="생성">
-	        <input type="button" id="cancelButton" value="취소">
+	        <h2>방 만들기</h2>
+	        
+	        <table align="center">
+	        <!-- 생성자 아이디 받아와서 넣어주기 -->
+			<tr>
+				<td width="200"><p align="right">생성자</p></td>
+				<td width="400"><input type="hidden" name="OWNER_ID" id ="ownerIdField" value="<%= member_id %>"></td>
+			</tr>
+			<tr>
+				<td width="200"><p align="right">방 이름</p></td>
+				<td width="400"><input type="text" name="ROOM_NM"></td>
+			</tr>
+			<tr>
+				<td width="200"><p align="right">방 비밀번호</p></td>
+				<td width="400"><input type="password" name="ROOM_PW"></td>
+			</tr>
+			<tr>
+				<td width="200"><p>&nbsp;</p></td>
+				<td width="400">
+					<input type="submit" id ="createButton" value="생성">
+					<input type="button" id="cancelButton" value="취소">
+				</td>
+			</tr>
+			</table>
+	  
         </div>
     </form>
 		
@@ -73,23 +107,8 @@
     
 
     <!-- JavaScript 코드 -->
-    <script>
-        // 방을 목록에 추가하는 함수
-        function addRoomToList(creatorID, roomName) {
-            var roomList = document.getElementById("room_wrap");
-            var div = document.createElement("div");
-            div.textContent = "방 생성자: " + creatorID + ", 방 이름: " + roomName;
-            roomList.appendChild(div);
-        }
-        
-        
-        
-        const loremIpsum = document.getElementById("lorem-ipsum")
-        
-        fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-            .then(response => response.text())
-            .then(result => loremIpsum.innerHTML = result)
-            
+    <script>  
+	
        	const modal = document.getElementById("modal")
        	
 		function modalOn() {
@@ -115,12 +134,13 @@
 		        modalOff()
 		    }
 		})
-		window.addEventListener("keyup", e => {
-		    if(isModalOn() && e.key === "Escape") {
-		        modalOff()
-		    }
-		})     
-  
+		//생성버튼 클릭시 그냥 게임화면으로 넘어가기
+		const createBtn = modal.querySelector("#createButton")
+		createBtn.addEventListener("submit",e =>{
+			window.location.href = "omokPlay.jsp";
+		})
+		
+		
     </script>
 </body>
 </html>

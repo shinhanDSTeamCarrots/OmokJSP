@@ -23,6 +23,6 @@ public class MemberService {
 	
 	//로그인
 	public MemberVO loginMember(MemberVO memberVO) {
-		memberDAO.isExisted(memberVO);
+		return memberDAO.isExisted(memberVO);
 	}
 }
