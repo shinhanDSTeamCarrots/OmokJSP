@@ -55,7 +55,7 @@ function sendMyInfo(){
 					alert("6목 이상입니다.");
 				}
 				if(message == "3"){
-					alert("쌍 이상입니다.");
+					alert("쌍삼입니다.");
 				}
 				if(message == "F"){
 					alert("놓을 수 없는 자리 입니다");
