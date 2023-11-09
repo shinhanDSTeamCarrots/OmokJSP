@@ -26,15 +26,18 @@ body {
     height: auto;
     margin: 10px;
 }
+
 .login-container {
-	padding: 20px;
-	height: 45vh;
+	padding: 5px;
+	height: 30vh;
 	width: 35vw;
-	margin: auto;
+	margin: 10vh auto;
+	border-radius: 5vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: #FAF8ED;
 }
 
 h2 {
@@ -53,7 +56,7 @@ h2 {
 }
 
 .input-group input {
-	width: 100%;
+	width: auto;
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
