@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="../Game/CSS/omokBoardStyle.css">
+	<link rel="stylesheet" type="text/css" href="../css/omokBoardStyle.css">
 </head>
 <body>
 	<div class="board_line">
