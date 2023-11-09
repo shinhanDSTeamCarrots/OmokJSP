@@ -1,6 +1,7 @@
 package Game;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -35,7 +36,8 @@ public class Omok extends HttpServlet {
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
-
+		
+	
 		// 1. 내가 돌을 가져왓을때
 		if (command.equals("sendMyInfo.do")) {
 			myStoneSet(request, response);
@@ -143,7 +145,6 @@ public class Omok extends HttpServlet {
 		int x = Integer.parseInt(request.getParameter("x_row"));
 		int y = Integer.parseInt(request.getParameter("y_col"));
 
-		
 		String stonecolor = request.getParameter("stone");
 
 		// 여러 요청에 걸쳐 게임 상태를 서버에 저장하고 검색하기 위해 HttpSession을 사용 (상태유지 행위).
@@ -197,6 +198,7 @@ public class Omok extends HttpServlet {
 				//오목도 아니고, 놓을수 없는 공간도 아님
 				message = "T";
 			}
+			
 		} else {
 			// success가 실패이면 다음 메세지 출력
 			message = "F";
@@ -219,15 +221,18 @@ public class Omok extends HttpServlet {
 		}
 
 		// 응답 타입을 JSON으로 설정
-		response.setContentType("application/json");
+		// response.setContentType("application/json");
+		
+		response.setContentType("text/html; charset=utf-8");
 
 		// 응답 문자열의 인코딩을 UTF-8로 설정함
-		response.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
 
 		// PrintWriter는 JSON 응답 전송하기 위함
 		PrintWriter out = response.getWriter();
 		out.print(json.toString());
-
+		
+		
 		// 버퍼에 있는 모든 출력 데이터를 클라이언트로 즉시 전송하고 버퍼를 비움
 		out.flush();
 	}
