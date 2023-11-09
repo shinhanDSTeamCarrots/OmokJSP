@@ -58,7 +58,12 @@
 <body>
 	<div class="container">
     <div class="form">
-			<div id="title"></div>
+			<div id="title">
+          <img src="../img/O.png" alt="Image 1" class="image">
+          <img src="../img/M.png" alt="Image 2" class="image">
+          <img src="../img/O.png" alt="Image 3" class="image">
+          <img src="../img/K.png" alt="Image 3" class="image">
+      </div>
 			<div>
 				<form method="post">
 					<section class="what">
@@ -74,8 +79,7 @@
 				</form>
       </div>
 		</div>
-	</div> 
-	
+	</div> 	
 </body>
 </body>
 
