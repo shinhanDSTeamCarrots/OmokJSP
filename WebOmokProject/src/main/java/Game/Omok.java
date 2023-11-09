@@ -1,6 +1,7 @@
 package Game;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ import Rank.RankDAO;
 @WebServlet("/omok/*")
 public class Omok extends HttpServlet {
 	// 나중에 ajax 양방향 통신을 위해 json.simpple-1.1.1.jar 라이브러리 가져올 것
-
+	
 	RankDAO rankDao;
 
 	@Override
@@ -35,7 +36,8 @@ public class Omok extends HttpServlet {
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
-
+		
+	
 		// 1. 내가 돌을 가져왓을때
 		if (command.equals("sendMyInfo.do")) {
 			myStoneSet(request, response);
@@ -45,7 +47,7 @@ public class Omok extends HttpServlet {
 
 		} // 3. 정보 검색
 		else if (command.equals("requUserInfo.do")) {
-			
+			winRateCalc(request,response);
 		} // 4. 시스템 메시지 수신
 		else if (command.equals("sendMemStatus.do")) {
 			String type = request.getParameter("type");
@@ -75,7 +77,7 @@ public class Omok extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		
 		
-		int playerNo = Integer.parseInt(request.getParameter(""));
+		int playerNo = Integer.parseInt(request.getParameter("member_id"));
 		int oppoNo = Integer.parseInt(request.getParameter(""));
 		if(rankDao == null)
 			rankDao = new RankDAO();
@@ -88,17 +90,20 @@ public class Omok extends HttpServlet {
 		jsonObject.put("winCnt", playerMap.get(1).intValue());
 		jsonObject.put("loseCnt", playerMap.get(2).intValue());
 		jsonObject.put("winRate", playerMap.get(3).doubleValue());
+		
 		JSONObject jsonObject2 = new JSONObject();
 		jsonObject2.put("oppoNo", oppoNo);
 		jsonObject2.put("winCnt", oppoMap.get(1).intValue());
 		jsonObject2.put("loseCnt", oppoMap.get(2).intValue());
 		jsonObject2.put("winRate", oppoMap.get(3).doubleValue());
+		
 		JSONArray arr = new JSONArray();
 		arr.add(jsonObject);
 		arr.add(jsonObject2);
-		JSONObject returnjson = new JSONObject();
-		returnjson.put("arr", arr);
-		writer.print(returnjson.toString());
+		
+		JSONObject json = new JSONObject();
+		json.put("arr", arr);
+		writer.print(json.toString());
 		
 	}
 	
@@ -140,13 +145,12 @@ public class Omok extends HttpServlet {
 		int x = Integer.parseInt(request.getParameter("x_row"));
 		int y = Integer.parseInt(request.getParameter("y_col"));
 
-		
-		String WhoIsPlayer = request.getParameter("Gameplayer");
+		String stonecolor = request.getParameter("stone");
 
 		// 여러 요청에 걸쳐 게임 상태를 서버에 저장하고 검색하기 위해 HttpSession을 사용 (상태유지 행위).
 		HttpSession session = request.getSession();
 
-		session.setAttribute("sessionPlayer", WhoIsPlayer);
+		session.setAttribute("sessionPlayer", stonecolor);
 
 		/* Board 객체를 생성.. 하지만 하지만 board에 아무런 데이터가 없다면 if 조건문을 타고 객체를 만든다.. 다음 실행때는 if문
 		// 안타고 getAttibute 호출해서 "board" 속성 가져옴..
@@ -194,6 +198,7 @@ public class Omok extends HttpServlet {
 				//오목도 아니고, 놓을수 없는 공간도 아님
 				message = "T";
 			}
+			
 		} else {
 			// success가 실패이면 다음 메세지 출력
 			message = "F";
@@ -206,25 +211,28 @@ public class Omok extends HttpServlet {
 		}
 
 		// JSON 객체 생성 및 세팅
-		JSONObject jsonResponse = new JSONObject();
+		JSONObject json = new JSONObject();
 
 		// boolean을 문자열로 변환하여 넣음
-		jsonResponse.put("success", String.valueOf(success));
-		jsonResponse.put("message", message);
+		json.put("success", String.valueOf(success));
+		json.put("message", message);
 		if (success) {
-			jsonResponse.put("currentPlayer", WhoIsPlayer);
+			json.put("currentPlayer", stonecolor);
 		}
 
 		// 응답 타입을 JSON으로 설정
-		response.setContentType("application/json");
+		// response.setContentType("application/json");
+		
+		response.setContentType("text/html; charset=utf-8");
 
 		// 응답 문자열의 인코딩을 UTF-8로 설정함
-		response.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
 
 		// PrintWriter는 JSON 응답 전송하기 위함
 		PrintWriter out = response.getWriter();
-		out.print(jsonResponse.toString());
-
+		out.print(json.toString());
+		
+		
 		// 버퍼에 있는 모든 출력 데이터를 클라이언트로 즉시 전송하고 버퍼를 비움
 		out.flush();
 	}

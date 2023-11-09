@@ -65,6 +65,7 @@ public class MemberController extends HttpServlet {
 			memberVO.setMember_id(request.getParameter("loginId"));
 			memberVO.setMember_pw(hashedPwd);
 			memberService.loginMember(memberVO);
+
 			
 			nextPage = "/WebOmokProject/room/listRoom.jsp"; //대기실로 이동
 		} else if(!"/loginMember.do".equals(action)) { //로그인 실패
