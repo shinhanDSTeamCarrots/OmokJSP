@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../css/omokRegisterStyle.css">
 <title>회원가입</title>
 <script>
 	function check() {
