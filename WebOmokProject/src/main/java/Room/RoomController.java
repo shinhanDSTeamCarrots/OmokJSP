@@ -2,12 +2,18 @@ package Room;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 
 @WebServlet("/roomController/*")
@@ -15,11 +21,10 @@ public class RoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     RoomDAO roomDAO;   
    
-    public RoomController() {
-        super();
-        // TODO Auto-generated constructor stub
+    protected void init(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	if(roomDAO == null)
+    		roomDAO = new RoomDAO();
     }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doHandle(request, response);
@@ -37,11 +42,15 @@ public class RoomController extends HttpServlet {
 		System.out.println("action: "+action);
 		PrintWriter writer = response.getWriter();
 		System.out.println("==========doHandle in ROOMController Called=============");
-		//addRoom : 방 정보 더해줌, nextPage = listRoom
+		if(roomDAO == null)
+			roomDAO = new RoomDAO();
+		//addRoom : 방 만들기, nextPage = listRoom
 		if("/addRoom.do".equals(action)) {
 			System.out.println("==========room add=============");
 			RoomVO roomVO = new RoomVO();
-			roomVO.setOwner_id(Integer.parseInt(request.getParameter("OWNER_ID")));
+			//roomVO.setOwner_id(Integer.parseInt(request.getParameter("OWNER_NO")));
+			int owner_id = (int)request.getSession().getAttribute("memberno");
+			roomVO.setOwner_id(owner_id);
 			String sr = request.getParameter("ROOM_NM");
 			if(sr.isEmpty() || sr.equals("")) {
 				roomVO.setRoom_nm("너만 오면 ㄱ");
@@ -62,7 +71,7 @@ public class RoomController extends HttpServlet {
 			catch(Exception e) {
 				res=false;
 			}
-			writer.print(res?"T":"F");
+			writer.print(res==true?"T":"F");
 			System.out.println("==========room add=============");
 		}
 		//delRoom: 방 삭제 이후 방 생성 화면으로 이동 (nextPage = listRoom) 
@@ -80,9 +89,20 @@ public class RoomController extends HttpServlet {
 			
 		}
 		else if("/playerJoined.do".equals(action)) {
+			System.out.println("==========playerJoined=============");
 			int JOINED_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
+			int ROOM_NO = Integer.parseInt(request.getParameter("ROOM_NO"));
+			if(!roomDAO.isPossibleToJoin(ROOM_NO)) {
+				writer.print("F");
+				return;
+			}
+			roomDAO.playerJoined(ROOM_NO,JOINED_NO);
+			HttpSession session = request.getSession();
+			session.setAttribute("roomid", ROOM_NO);
+			writer.print("T");
+			
 			System.out.println("==========playerJoined=============");
-			System.out.println("==========playerJoined=============");
+			return;
 			
 		}
 		else if("/playerExited.do".equals(action)){
@@ -90,6 +110,32 @@ public class RoomController extends HttpServlet {
 			System.out.println("==========playerExited=============");	
 			System.out.println("==========playerExited=============");	
 		}
+		else if("/roomList.do".equals(action)) {
+			System.out.println("==========roomList=============");
+			List<RoomVO> list =roomDAO.listRoom();
+			JSONArray jsonArr = new JSONArray();
+			for(RoomVO romm : list) {
+				JSONObject obj = new JSONObject();
+				obj.put("room_no", romm.getRoom_id());
+				obj.put("owner_id", romm.getOwner_id());
+				obj.put("joined_no", romm.getJoined_no());
+				obj.put("room_nm", romm.getRoom_nm());
+				obj.put("room_pw", romm.getRoom_pw());
+				obj.put("created_date", romm.getDateString());
+				obj.put("option_val", romm.getOption_val());
+				obj.put("owner_nm", romm.getOwner_nm());
+				obj.put("joined_nm", romm.getJoined_nm());
+				jsonArr.put(obj);
+			}
+			System.out.println(jsonArr.toString());
+			writer.print(jsonArr.toString());
+			
+			
+			System.out.println("==========roomList=============");
+			return;
+			
+		}
 
 	}
+	
 }

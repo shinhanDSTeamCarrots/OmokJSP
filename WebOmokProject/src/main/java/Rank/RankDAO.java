@@ -200,15 +200,15 @@ public class RankDAO {
 	    List<Map<String, Object>> result = new ArrayList<>();
 	    try {
 	        conn = dataFactory.getConnection();
-	        String query = "SELECT M.MEMBER_ID, L1.WINCNT, L2.LOSECNT, (L1.WINCNT / (L1.WINCNT + L2.LOSECNT)) * 100 AS WINRATE\r\n"
+	        String query = "SELECT M.MEMBER_ID, NVL(L1.WINCNT,0) AS WINCNT, NVL(L2.LOSECNT,0) AS LOSECNT, NVL((L1.WINCNT / (L1.WINCNT + L2.LOSECNT)) * 100,0) AS WINRATE\r\n"
 	        		+ "FROM MEMBER_TB M\r\n"
-	        		+ "JOIN (\r\n"
+	        		+ "LEFT JOIN (\r\n"
 	        		+ "    SELECT WINNER_NO AS MN, COUNT(*) AS WINCNT\r\n"
 	        		+ "    FROM LOG_TB\r\n"
 	        		+ "    WHERE WINNER_NO IS NOT NULL\r\n"
 	        		+ "    GROUP BY WINNER_NO\r\n"
 	        		+ ") L1 ON L1.MN = M.MEMBER_NO\r\n"
-	        		+ "JOIN (\r\n"
+	        		+ "LEFT JOIN (\r\n"
 	        		+ "    SELECT LOSER_NO AS MN, COUNT(*) AS LOSECNT\r\n"
 	        		+ "    FROM LOG_TB\r\n"
 	        		+ "    WHERE LOSER_NO IS NOT NULL\r\n"
@@ -217,7 +217,8 @@ public class RankDAO {
 	        		+ "WHERE 0=0 "
 	        		+ "ORDER BY WINRATE DESC"; // 승률을 내림차순으로 정렬
 
-	        pstmt = conn.prepareStatement(query);	        
+	        pstmt = conn.prepareStatement(query);
+	        System.out.println("query: "+query);
 	        rs = pstmt.executeQuery();
 
 	        while (rs.next()) {

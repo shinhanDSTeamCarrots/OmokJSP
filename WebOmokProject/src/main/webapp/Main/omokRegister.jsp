@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css"
 	href="../css/omokRegisterStyle.css">
 <script type="text/javascript">
-	console.log("왜 시바 안되냐");
 	function check() {
 		let id = document.getElementById('id');
 		let pwd = document.getElementById('pwd');
@@ -89,17 +88,16 @@
 <body>
 	<div class="container">
 		<div class="form">
-			<form method="post" action="${contextPath}/Member/joinMember.do">
+			<form method="post">
 				<h1>회원가입</h1>
-				<input type="text" name="signId" id="id" placeholder="아이디">
-				<input type="button" id="btn_duplicate" value="중복확인"
-					onClick="idCheck()" /><br> <input type="password"
-					name="signPw" id="pwd" placeholder="비밀번호"><br> <input
-					type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"><br>
-				<input type="text" name="signName" id="name" placeholder="이름"><br>
-				<input type="text" name="nicknm" id="nicknm" placeholder="닉네임"><br>
-				<input type="email" name="signEmail" id="email" placeholder="이메일"><br>
-				<input type="submit" value="가입하기" onClick="check()">
+				<input type="text" name="signId" id="id" placeholder="아이디"/>
+				<input type="button" id="btn_duplicate" value="중복확인" onClick="idCheck()" />
+				<input type="password" name="signPw" id="pwd" placeholder="비밀번호"/>
+				<input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"/><br>
+				<input type="text" name="signName" id="name" placeholder="이름"/><br>
+				<input type="text" name="nicknm" id="nicknm" placeholder="닉네임"/><br>
+				<input type="email" name="signEmail" id="email" placeholder="이메일"/><br>
+				<input type="button" value="가입하기" onClick="check()" />
 			</form>
 		</div>
 	</div>
