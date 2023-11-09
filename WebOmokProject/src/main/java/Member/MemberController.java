@@ -40,14 +40,16 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		
+		System.out.println("==========doHandle in MemberController Called=============");
 		//아이디 중복 여부
 		if("/duplicateMember.do".equals(action)) {
+			System.out.println("==========id 중복 체크=============");
 			//아이디를 먼저 받아온다
 			String id = (String) request.getParameter("id");
 			//아이디로 중복 검사를 한다
 			boolean isdup = memberService.duplicateMember(id);
 			//그 값에 따라 T F 를 보낸다.
+			System.out.println("==========id 중복 체크=============");
 			if(isdup) {
 				//중복임
 				writer.print("F");
@@ -59,6 +61,7 @@ public class MemberController extends HttpServlet {
 				return;
 			}
 		} else if("/joinMember.do".equals(action)) { // 회원 가입(사용자 추가)
+			System.out.println("==========joinmeber=============");
 			//비밀번호 암호화
 			String hashedPwd = hashPassword(request.getParameter("signPw"));
 			
@@ -70,8 +73,10 @@ public class MemberController extends HttpServlet {
 			memberVO.setMember_nicknm(request.getParameter("nicknm"));
 			memberVO.setEmail(request.getParameter("signEmail"));
 			memberService.joinMember(memberVO);
+			System.out.println("==========joinmeber=============");
 			return;
 		} else if("/loginMember.do".equals(action)) { //로그인
+			System.out.println("==========logined=============");
 			//비밀번호 암호화
 			String hashedPwd = hashPassword(request.getParameter("loginPw"));
 			
@@ -90,6 +95,7 @@ public class MemberController extends HttpServlet {
 				writer.print("T");
 				//로그인 성공
 			}
+			System.out.println("==========logined=============");
 			return;
 		}
 	}
