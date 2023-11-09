@@ -87,7 +87,7 @@
 <body>
 	<div class="container">
 		<div class="form">
-			<form method="post" action="${contextPath}/Member/joinMember.do">
+			<form method="post">
 				<div class="input-group">
 				    <h2>회원가입</h2>
 				
@@ -110,7 +110,7 @@
 				    <label for="email">이메일</label>
 				    <input type="email" name="signEmail" id="email" placeholder="이메일"><br>
 				
-				    <input type="submit" value="가입하기" onClick="check()">
+				    <input type="button" value="가입하기" onClick="check()">
 				</div>
 			</form>
 		</div>
