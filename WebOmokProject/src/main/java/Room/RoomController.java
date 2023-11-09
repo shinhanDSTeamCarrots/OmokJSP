@@ -52,11 +52,19 @@ public class RoomController extends HttpServlet {
 			nextPage = "/WebOmokProject/room/listRoom.jsp";
 		}
 		else if("/playerJoined.do".equals(action)) {
+			int ROOM_ID = Integer.parseInt(request.getParameter("ROOM_ID"));
 			int JOINED_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
+			roomDAO.playerJoined(ROOM_ID, JOINED_NO);
+			request.setAttribute("msg", "playerJoined");
+			nextPage = "/WebOmokProject/Game/omokPlay.jsp";
 			
 		}
-		else if("/playerExited.do".equals(action)){
-			int Exited_NO = Integer.parseInt(request.getParameter("JOINED_NO"));	
+		else if("/playerExit.do".equals(action)){
+			int ROOM_ID = Integer.parseInt(request.getParameter("ROOM_ID"));
+			int JOINED_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
+			roomDAO.playerExit(ROOM_ID, JOINED_NO);
+			request.setAttribute("msg", "playerExit");
+			nextPage = "/WebOmokProject/Game/omokPlay.jsp";
 		}
 
 	}
