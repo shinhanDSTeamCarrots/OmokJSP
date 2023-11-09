@@ -61,16 +61,21 @@
 			<div id="title"></div>
 			<div>
 				<form method="post">
-					<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
-					<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" /><br>
-					<div id="button">
-						<input type="button" value="로그인" onclick="whenLoginClick()" /><br>
-						<input type="button" onclick="whenRegistClicked()" value="회원가입" />
-					</div>
+					<section class="what">
+						<div id="Input">
+							<input type="text" name="loginId" id="loginId" placeholder="아이디" /><br>
+							<input type="password" name="loginPw" id="loginPw" placeholder="비밀번호" /><br>
+						</div>
+						<div id="button">
+							<input type="button" value="로그인" onclick="whenLoginClick()" /><br>
+							<input type="button" onclick="whenRegistClicked()" value="회원가입" />
+						</div>
+					</section>
 				</form>
       </div>
 		</div>
-	</div>
+	</div> 
+	
 </body>
 </body>
 
