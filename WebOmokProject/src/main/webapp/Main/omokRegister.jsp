@@ -91,8 +91,8 @@
 </script>
 </head>
 <body>
-	<div id="wrap">
-		<div class="b1">
+	<div class="container">
+		<div class="form">
 			<form method="post" action="${contextPath}/Member/joinMember.do">
 				<h1>회원가입</h1>
 				<input type="text" name="signId" id="id" placeholder="아이디">
