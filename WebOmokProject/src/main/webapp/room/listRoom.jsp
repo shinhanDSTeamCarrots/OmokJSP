@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Rank.RankDAO"%>
+<%@ page import= "Member.MemberVO" %>
+<%
+	MemberVO myvo=(MemberVO)request.getSession().getAttribute("myvo");
+	String member_id= myvo.getMember_id();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,28 +30,19 @@
 		            	<th>생성자</th>
 		            	<th>방 이름</th>
 		            	<th>방 생성일</th>
-		            	<th>
 	            	</tr>
+	            	
+	            	
 	            	<!--roomDAO받아와서 방 리스트 넣기-->
-	            	<c:if test="${empty listRoom }">
-					<tr>
-						<td colspan="5">
-							<b>생성된 방이 없습니다.</b>
-						</td>
-					</tr>
-					</c:if>
+	            	<!-- 방이름 클릭시 게임페이지로 이동 -->
 					<c:forEach var="room" items="${listRoom }">
 					<tr align="center">
 						<td>${room.OWNER_ID }</td>
 						<td>${room.JOINED_NO }</td>
-						<td>${room.ROOM_NM }</td>
-						<td><a href="">${room.CREATED_DATE }</a></td>
-						<!-- 이거 띄울 필요 없음 -->
-					
+						<td><a href="omokPlay.jsp">${room.ROOM_NM }</td>
+						<td>${room.CREATED_DATE }</a></td>							
 					</tr>
-					</c:forEach>
-					
-	            
+					</c:forEach>	            
 	            </table>
 	        </div>
 	    </div>	  
@@ -53,23 +50,25 @@
 	    <!-- 사용자 랭크 목록 -->
 	    <div class="rank-list">
 	    	<div id="rank_wrap" style="height: 3420px;">
+	    			
 		        <table>
 		            <tr>
 		                <th>사용자</th>
-		                <th>랭크</th>
+		                <th>승률</th>
 		            </tr>
 		            <!-- RankDAO로 값 넣어주기 -->
-		            <c:forEach items="${userRankList}" var="userRank">
+		            
+		            <c:forEach items="${userRank}" var="userRank">
 		                <tr>
-		                    <td>${userRank.username}</td>
-		                    <td>${userRank.rank}</td>
+		                    <td>${userRank.memberId}</td>
+		                    <td>${userRank.winRate}</td>
 		                </tr>
 		            </c:forEach>
 		        </table>
 	        </div>
 	    </div>
     </div>
-    
+    우
 	<!-- 방생성 폼 -->
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">			
@@ -81,7 +80,7 @@
 	        <!-- 생성자 아이디 받아와서 넣어주기 -->
 			<tr>
 				<td width="200"><p align="right">생성자</p></td>
-				<td width="400"><input type="" name="OWNER_ID"></td>
+				<td width="400"><input type="hidden" name="OWNER_ID" id ="ownerIdField" value="<%= member_id %>"></td>
 			</tr>
 			<tr>
 				<td width="200"><p align="right">방 이름</p></td>
@@ -94,7 +93,7 @@
 			<tr>
 				<td width="200"><p>&nbsp;</p></td>
 				<td width="400">
-					<input type="submit" value="생성">
+					<input type="submit" id ="createButton" value="생성">
 					<input type="button" id="cancelButton" value="취소">
 				</td>
 			</tr>
@@ -108,17 +107,8 @@
     
 
     <!-- JavaScript 코드 -->
-    <script>
-        
-        
-        
-        
-        const loremIpsum = document.getElementById("lorem-ipsum")
-        
-        fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-            .then(response => response.text())
-            .then(result => loremIpsum.innerHTML = result)
-            
+    <script>  
+	
        	const modal = document.getElementById("modal")
        	
 		function modalOn() {
@@ -144,13 +134,13 @@
 		        modalOff()
 		    }
 		})
-		//생성버튼 클릭시 그냥 게임화면으로 넘어가게만 하면됨
-		window.addEventListener("keyup", e => {
-		    if(isModalOn() && e.key === "Escape") {
-		        modalOff()
-		    }
-		})     
-  
+		//생성버튼 클릭시 그냥 게임화면으로 넘어가기
+		const createBtn = modal.querySelector("#createButton")
+		createBtn.addEventListener("submit",e =>{
+			window.location.href = "omokPlay.jsp";
+		})
+		
+		
     </script>
 </body>
 </html>
