@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>오목 게임</title>
+	<link rel="icon" href="../img/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="../css/omokPlayStyle.css">
 </head>
 <body>
