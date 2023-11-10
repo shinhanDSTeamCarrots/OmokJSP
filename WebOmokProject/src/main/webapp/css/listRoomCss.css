@@ -1,31 +1,67 @@
 @charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    margin: 30px;
+    margin: 40px;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #F9B572;
+}
+.image {
+	width: 60px;
+	height: auto;
+	margin: 10px;
+}
+.miniTitle{
+	height:5vw;
+	line-height:100%
+}
+.buttonplace {
+    height: 5vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    margin-right: 38%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Vertically align items in .buttonplace */
 }
 
-h1 {
+.container {
     text-align: center;
+    border-radius: 5vw;
+    padding: 5vw;
+    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
+    height: 40vh;
+    width: 40vw;
+    background-color: #F9B572;
+    margin: auto;
 }
 
 .room-list {
-    width: 70%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
+    width: 63%;
+    background-color: #FAF8ED;
+    border-radius: 1.5vw;
+    border: 1px solid #fff;
+    padding: 1vw;
     float: left;
     box-sizing: border-box;
 }
 
 .rank-list {
-    width: 30%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
+    width: 33%;
+    background-color: #FAF8ED;
+    border-radius: 1.5vw;
+    border: 1px solid #fff;
+    padding: 1vw;
     float: right;
     box-sizing: border-box;
+}
+#room_wrap{
+	border-radius:1.5vw;
+	padding: 1vw;
+	
+}
+#rank_wrap{
+	border-radius:1.5vw;
+	padding: 1vw;
 }
 
 ul {
@@ -39,48 +75,122 @@ li {
 
 table {
     width: 100%;
+    border-radius: 2vw;
     border-collapse: collapse;
 }
 
 th, td {
-    border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+    color: #000;
 }
 
 th {
-    background-color: silver;
+    background-color: #748E63;
     color: #fff;
 }
+.innerform{
+	width:40px;
+}
 
-.modal-overlay {	
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	display: none;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .modal-window {
-	background: rgba( 69, 139, 197, 0.70 );
-	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-	backdrop-filter: blur( 13.5px );
-	-webkit-backdrop-filter: blur( 13.5px );
-	border-radius: 10px;
-	border: 1px solid rgba( 255, 255, 255, 0.18 );
-	width: 400px;
-	height: 500px;
-	position: relative;
-	top: -100px;
+    background: rgba(153, 176, 128, 0.85);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);  
+    border-radius: 3vw;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 400px;
+    height: 500px;
+    position: relative;
+    top: -100px;
+    padding: 20px;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+.input-group {
+	margin-bottom: 15px;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: auto;
 	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #99B080;
+}
+#createRoomForm{
+	background: rgba(250, 248, 237, 0.85);
+	border-radius: 5vw;
+	
+}
+#formtable{
+	margin-top:10%;
+	margin-bottom:10%;
+}
+#createRoomButton {
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
+}
+
+#createRoomButton:hover {
+	background: #748E63;
+}
+#createButton {
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
+}
+#createButton:hover {
+	background: #748E63;
+}
+#cancelButton {
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
+}
+#cancelRoomButton:hover {
+	background: #748E63;
 }

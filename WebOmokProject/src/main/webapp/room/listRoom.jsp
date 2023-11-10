@@ -21,21 +21,30 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-<title>방 대기 화면</title>
+<title>대기방</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/listRoomCss.css">
 </head>
 <body>
-	<h1>게임 대기 방</h1>
+	<div id="miniTitle">
+				<img src="../img/O.png" alt="Image 1" class="image">
+				<img src="../img/M.png" alt="Image 2" class="image">
+				<img src="../img/O.png" alt="Image 3" class="image">
+				<img src="../img/K.png" alt="Image 4" class="image">
+	</div>
 	<div id="container">
-		<input type="button" id="refreshBtn" class="refreshBtn" src="../img/refresh.png" onclick="getRoomList()" width="10px"/>
-		<!-- 방 만들기 버튼 -->
-		<button id="createRoomButton">방 만들기</button>
+		<div class="buttonplace" >			
+			<!-- 방 만들기 버튼 -->
+			<button id="createRoomButton">방 만들기</button>
+			<button type="button">
+  				<img src="../img/refresh.png" alt="refreshbtn" onclick="getRoomList()" width="10px">
+			</button>	
+			<!-- <input type="button" id="refreshBtn" class="refreshBtn" src="../img/refresh.png" onclick="getRoomList()" width="10px"/> -->	
+		</div>
 
 		<!-- 방 목록 -->
-		<div class="room-list"
-			style="background-color: #fff; padding-top: 20px;">
+		<div class="room-list">
 			<div id="room_wrap" style="height: 3420px;">
 
 				<!-- 여기에 동적으로 방이 추가 -->
@@ -54,6 +63,7 @@
 						</tr>
 					</c:forEach>
 					-->
+					
 				</table>
 			</div>
 		</div>
@@ -85,9 +95,9 @@
 		<div class="modal-window">
 
 			<form id="createRoomForm" method="post">
-				<h2>방 만들기</h2>
+				
 
-				<table align="center">
+				<table align="center" id="formtable">
 					<!-- 생성자 아이디 받아와서 넣어주기 -->
 					<tr>
 						<td width="200"><p align="right">생성자</p></td>
@@ -142,28 +152,33 @@
 						+"<th>방 생성일</th>"
 						+"<th>참여자</th>"
 						+"</tr>";
-					
+			
 					if(msg == ""){
 						document.getElementById("roomListTable").innerHTML= out;
 						return;
-					}
-					for(let i in list.items){
-						out	+=	"<tr>"
-							+	"<td>"+list.items[i].owner_nm+"</td>"
-							+	"<td><p onclick='whenRoomTryToJoin("+i+")'>"+list.items[i].room_nm+"</p></td>"
-							+	"<td>"+list.items[i].created_date+"</td>"
-							+	"<td>"+list.items[i].joined_nm+"</td>"
-							+	"</tr>";
-					}
-					document.getElementById("roomListTable").innerHTML= out;
+					} 
+						
+					for(let i in list){
+							out	+=	"<tr>"
+								+	"<td>"+ list[i].owner_nm+"</td>"
+								+	"<td><p onclick='whenRoomTryToJoin("+list[i].joined_no+","+list[i].room_no+");'>" + list[i].room_nm + "</p></td>"
+								+	"<td>" + list[i].created_date + "</td>"
+								+	"<td>"+list[i].joined_nm+"</td>"
+								+	"</tr>";
+								
+						}
+						
+						document.getElementById("roomListTable").innerHTML= out;
+					
 		          },
 				  
 			});
 		}
 
-		function whenRoomTryToJoin(i){
+		function whenRoomTryToJoin(joined_no, room_no){
 			//방이 joined 가 있는지 확인
-			if(list.items[i].joined_no != -1){
+			
+			if(joined_no > 0){
 				alert("사용자가 꽉 찬 방입니다.");
 				return;
 			}
@@ -174,8 +189,8 @@
 		          async: "false",
 		          dataType: "text",
 		          data: {
-					JOINED_NO: list.items[i].joined_no,
-					ROOM_NO : list.items[i].room_no
+					JOINED_NO:joined_no,
+					ROOM_NO : room_no
 		          },
 		          success: function (msg) {
 		            console.log("ajax 성공");
@@ -239,6 +254,7 @@
 		            console.log("ajax 성공");
 					console.log("msg"+msg);
 		            if (msg == "T") {
+		            	
 		                window.self.location = "${pageContext.request.contextPath}/Game/omokPlay.jsp";
 		            } else if(msg == "F") {
 		              alert("방 생성에 실패했습니다 ㅠㅠ");
@@ -252,7 +268,6 @@
 		$(window).ready(function(){
 			getRoomList();
 		})
-		
     </script>
 </body>
 </html>
