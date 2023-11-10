@@ -6,16 +6,22 @@ body {
     background-color: #F9B572;
 }
 .image {
-	width: 100px;
+	width: 60px;
 	height: auto;
 	margin: 10px;
 }
-
+.miniTitle{
+	height:5vw;
+	line-height:100%
+}
 .buttonplace {
     height: 5vw;
-    line-height: 100%;
-    margin-bottom: 2vw;
-    right: 33%; /* Align to the right end of room-list */
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    margin-right: 38%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Vertically align items in .buttonplace */
 }
 
 .container {
@@ -31,9 +37,9 @@ body {
 
 .room-list {
     width: 63%;
-    background-color: #fff;
-    border-radius: 1vw;
-    border: 1px solid #ccc;
+    background-color: #FAF8ED;
+    border-radius: 1.5vw;
+    border: 1px solid #fff;
     padding: 1vw;
     float: left;
     box-sizing: border-box;
@@ -41,12 +47,21 @@ body {
 
 .rank-list {
     width: 33%;
-    background-color: #fff;
-    border-radius: 1vw;
-    border: 1px solid #ccc;
+    background-color: #FAF8ED;
+    border-radius: 1.5vw;
+    border: 1px solid #fff;
     padding: 1vw;
     float: right;
     box-sizing: border-box;
+}
+#room_wrap{
+	border-radius:1.5vw;
+	padding: 1vw;
+	
+}
+#rank_wrap{
+	border-radius:1.5vw;
+	padding: 1vw;
 }
 
 ul {
@@ -67,11 +82,15 @@ table {
 th, td {
     padding: 8px;
     text-align: center;
+    color: #000;
 }
 
 th {
-    background-color: #9FC93C;
+    background-color: #748E63;
     color: #fff;
+}
+.innerform{
+	width:40px;
 }
 
 .modal-overlay {
@@ -95,24 +114,83 @@ th {
 .modal-window {
     background: rgba(153, 176, 128, 0.85);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);  
-    border-radius: 10px;
+    border-radius: 3vw;
     border: 1px solid rgba(255, 255, 255, 0.18);
     width: 400px;
     height: 500px;
     position: relative;
     top: -100px;
-    padding: 10px;
+    padding: 20px;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+.input-group {
+	margin-bottom: 15px;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #99B080;
+}
+#createRoomForm{
+	background: rgba(250, 248, 237, 0.85);
+	border-radius: 5vw;
+	
+}
+#formtable{
+	margin-top:10%;
+	margin-bottom:10%;
 }
 #createRoomButton {
-	width: 15%;
-	padding: 10px;
-	border: none;
-	border-radius: 4px;
-	background: #99B080;
-	color: white;
-	cursor: pointer;
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
 }
 
 #createRoomButton:hover {
+	background: #748E63;
+}
+#createButton {
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
+}
+#createButton:hover {
+	background: #748E63;
+}
+#cancelButton {
+	display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #99B080;
+    color: white;
+    cursor: pointer;
+    margin-right:7px;
+}
+#cancelRoomButton:hover {
 	background: #748E63;
 }
