@@ -1,6 +1,8 @@
 package Game;
 
 import org.json.JSONObject;
+
+
 import java.util.Stack;
 public class Board {
 	private int[][] map;
@@ -32,13 +34,20 @@ public class Board {
 			}
 		}
 	}
-
-	public boolean myStoneplay(int x, int y) {
+	public void Print() {
+		for(int i =0;i<SIZE; i++) {
+			for(int j =0; j< SIZE; j++) {
+				System.out.print(map[i][j]);
+			}
+			System.out.println("");
+		}
+	}
+	public boolean myStoneplay(int x, int y,int stone) {
 		// 이미 돌이 놓인 자리인지, 좌표가 범위 내인지 검사
 		if (x >= 0 && x < SIZE && y >= 0 && y < SIZE && map[x][y] == 0) {
 			// 전성욱 String 기반에서 int 기반으로 변경 B 는 1 W 는 2 로 통일
-			map[x][y] = currentPlayer; // "B" 또는 "W"를 보드에 놓음
-			stack.add(new Stroke(-1,currentPlayer,x,y));
+			map[x][y] = stone; // "B" 또는 "W"를 보드에 놓음
+			stack.add(new Stroke(-1,stone,x,y));
 			return true;
 		}
 		return false;
@@ -47,13 +56,14 @@ public class Board {
 	public void Opponentplay(int x, int y) {
 		// 상대가 놓은 돌을 놓는다
 		// 상대의 돌은 무조건 내 돌이 아닐테니
-		int opponentPlayer = (currentPlayer == 0 ? 1 : 0);
+		int opponentPlayer = (currentPlayer == 1 ? 2 : 1);
 		map[x][y] = opponentPlayer;
 		stack.add(new Stroke(-1,opponentPlayer,x,y));
 	}
 
 	// 오목 체크 함수
-	public boolean checkOmok(int x, int y) {
+	/*
+	public boolean checkOmok(int x, int y,int stone) {
 		// 오목을 이루는데 필요한 돌의 수
 		final int OMOK_COUNT = 5;
 
@@ -63,13 +73,13 @@ public class Board {
 		// 가로 방향 체크
 		count = 1;
 		// 왼쪽 방향
-		for (int i = x - 1; i >= 0 && map[y][i] == currentPlayer; i--) {
+		for (int i = x - 1; i >= 0 && map[y][i] == stone; i--) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
 		}
 		// 오른쪽 방향
-		for (int i = x + 1; i < map[y].length && map[y][i] == currentPlayer; i++) {
+		for (int i = x + 1; i < map[y].length && map[y][i] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
@@ -78,11 +88,11 @@ public class Board {
 		// 수직 방향 체크
 		count = 1;
 		// 위쪽 방향
-		for (int i = y - 1; i >= 0 && map[i][x] == currentPlayer; i--) {
+		for (int i = y - 1; i >= 0 && map[i][x] == stone; i--) {
 			count++;
 		}
 		// 아래쪽 방향
-		for (int i = y + 1; i < map.length && map[i][x] == currentPlayer; i++) {
+		for (int i = y + 1; i < map.length && map[i][x] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
@@ -90,13 +100,13 @@ public class Board {
 
 		// 대각선 (좌상향) 방향 체크
 		count = 1;
-		for (int i = 1; x - i >= 0 && y - i >= 0 && map[y - i][x - i] == currentPlayer; i++) {
+		for (int i = 1; x - i >= 0 && y - i >= 0 && map[y - i][x - i] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
 		}
 		// 대각선 (우하향) 방향 체크
-		for (int i = 1; x + i < map[0].length && y + i < map.length && map[y + i][x + i] == currentPlayer; i++) {
+		for (int i = 1; x + i < map[0].length && y + i < map.length && map[y + i][x + i] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
@@ -104,13 +114,13 @@ public class Board {
 
 		// 대각선 (우상향) 방향 체크
 		count = 1;
-		for (int i = 1; x + i < map[0].length && y - i >= 0 && map[y - i][x + i] == currentPlayer; i++) {
+		for (int i = 1; x + i < map[0].length && y - i >= 0 && map[y - i][x + i] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
 		}
 		// 대각선 (좌하향) 방향 체크
-		for (int i = 1; x - i >= 0 && y + i < map.length && map[y + i][x - i] == currentPlayer; i++) {
+		for (int i = 1; x - i >= 0 && y + i < map.length && map[y + i][x - i] == stone; i++) {
 			count++;
 			if (count == OMOK_COUNT)
 				return true;
@@ -118,10 +128,92 @@ public class Board {
 
 		// 모든 방향에 대해 오목이 아니면 false 반환
 		return false;
-	}
+	}*/
+	public boolean checkOmok( int stone) {
+    	for(int i=0; i<SIZE; i++) {
+    		for(int j = 0; j< SIZE; j++) {
+    			if(map[i][j] == stone) {
+    				//상
+    				
+    				int count = 1;
+    				for(int k = 1; k <= 5; k++) {
+    					if(i - k < 0) {
+    						break;
+    					}
+    					if(map[i-k][j]!=stone) {
+    						break;
+    					}
+    					else {
+    						count++;
+    					}
+    				}
+    				if(count > 4) {
+    					//성공!
+    					return true;
+    				}
+    				
+    				//왼쪽
+    				count = 1;
+    				for(int k = 1; k <= 5; k++) {
+    					if(j - k < 0) {
+    						break;
+    					}
+    					if(map[i][j-k]!= stone) {
+    						break;
+    					}
+    					else {
+    						count++;
+    					}
+    				}
+    				if(count > 4) {
+    					//성공!
+    					return true;
+    				}
+    				//상좌
+    				count = 1;
+    				for(int k = 1; k < 5; k++) {
+    					if(j - k < 0 || i - k < 0) {
+    						break;
+    					}
+    					if(map[i-k][j-k]!= stone) {
+    						break;
+    					}
+    					else {
+    						count++;
+    					}
+    				}
+    				if(count > 4) {
+    					//성공!
+    					return true;
+    				}
+    				//상우
+    				count = 1;
+    				for(int k = 1; k < 5; k++) {
+    					if(j + k > SIZE-1 || i - k < 0) {
+    						break;
+    					}
+    					if(map[i-k][j+k]!= stone) {
+    						break;
+    					}
+    					else {
+    						count++;
+    					}
+    				}
+    				if(count > 4) {
+    					//성공!
+    					return true;
+    				}
+    				
+    			}
+    		}
+    	}
+    	// 우승이면true 아니면 false
+    	return false;
+    	
+    }
 
 	// 육목 체크
-	public boolean checkSix(int x, int y) {
+	public boolean checkSix(int x, int y, int stone) {
 		// 육목을 이루는데 필요한 돌의 수
 		final int SIX_COUNT = 6;
 
@@ -130,36 +222,36 @@ public class Board {
 
 		// 수평 방향 체크 (왼쪽 + 오른쪽)
 		count = 1;
-		for (int i = x - 1; i >= 0 && map[y][i] == currentPlayer; i--)
+		for (int i = x - 1; i >= 0 && map[y][i] == stone; i--)
 			count++;
-		for (int i = x + 1; i < map[0].length && map[y][i] == currentPlayer; i++)
+		for (int i = x + 1; i < map[0].length && map[y][i] == stone; i++)
 			count++;
 		if (count == SIX_COUNT)
 			return true;
 
 		// 수직 방향 체크 (위 + 아래)
 		count = 1;
-		for (int i = y - 1; i >= 0 && map[i][x] == currentPlayer; i--)
+		for (int i = y - 1; i >= 0 && map[i][x] == stone; i--)
 			count++;
-		for (int i = y + 1; i < map.length && map[i][x] == currentPlayer; i++)
+		for (int i = y + 1; i < map.length && map[i][x] == stone; i++)
 			count++;
 		if (count == SIX_COUNT)
 			return true;
 
 		// 대각선 (좌상향 + 우하향) 체크
 		count = 1;
-		for (int i = 1; x - i >= 0 && y - i >= 0 && map[y - i][x - i] == currentPlayer; i++)
+		for (int i = 1; x - i >= 0 && y - i >= 0 && map[y - i][x - i] == stone; i++)
 			count++;
-		for (int i = 1; x + i < map[0].length && y + i < map.length && map[y + i][x + i] == currentPlayer; i++)
+		for (int i = 1; x + i < map[0].length && y + i < map.length && map[y + i][x + i] == stone; i++)
 			count++;
 		if (count == SIX_COUNT)
 			return true;
 
 		// 대각선 (우상향 + 좌하향) 체크
 		count = 1;
-		for (int i = 1; x + i < map[0].length && y - i >= 0 && map[y - i][x + i] == currentPlayer; i++)
+		for (int i = 1; x + i < map[0].length && y - i >= 0 && map[y - i][x + i] == stone; i++)
 			count++;
-		for (int i = 1; x - i >= 0 && y + i < map.length && map[y + i][x - i] == currentPlayer; i++)
+		for (int i = 1; x - i >= 0 && y + i < map.length && map[y + i][x - i] == stone; i++)
 			count++;
 		if (count == SIX_COUNT)
 			return true;
@@ -169,7 +261,7 @@ public class Board {
 	}
 
 	// 쌍삼 체크
-	public boolean checkThree(int x, int y, int directionX, int directionY) {
+	public boolean checkThree(int x, int y, int directionX, int directionY, int stone) {
 		int[][] directions = { { directionX, directionY }, { -directionX, -directionY } };
 
 		int stones = 0;
@@ -193,7 +285,7 @@ public class Board {
 						open = true;
 					if (i > 0)
 						break; // 돌 시퀀스 이후 열린 공간이 있어야 하므로
-				} else if (map[ny][nx] == currentPlayer) {
+				} else if (map[ny][nx] == stone) {
 					stones++;
 				} else {
 					break;
@@ -210,27 +302,27 @@ public class Board {
 	}
 
 	// 쌍삼
-	public boolean checkDoubleThree(int x, int y) {
+	public boolean checkDoubleThree(int x, int y,int stone) {
 		// 삼이 형성되는지 여부를 방향별로 체크하고 삼의 개수를 카운트
 		int threes = 0;
 
 		// 수평 방향으로 삼을 확인
-		if (checkThree(x, y, 1, 0)) {
+		if (checkThree(x, y, 1, 0,stone)) {
 			threes++;
 		}
 
 		// 수직 방향으로 삼을 확인
-		if (checkThree(x, y, 0, 1)) {
+		if (checkThree(x, y, 0, 1,stone)) {
 			threes++;
 		}
 
 		// 대각선 (좌상향 + 우하향) 방향으로 삼을 확인
-		if (checkThree(x, y, 1, 1)) {
+		if (checkThree(x, y, 1, 1,stone)) {
 			threes++;
 		}
 
 		// 대각선 (우상향 + 좌하향) 방향으로 삼을 확인
-		if (checkThree(x, y, 1, -1)) {
+		if (checkThree(x, y, 1, -1,stone)) {
 			threes++;
 		}
 

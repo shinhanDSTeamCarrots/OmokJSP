@@ -256,9 +256,12 @@
 		            if (msg == "T") {
 		            	
 		                window.self.location = "${pageContext.request.contextPath}/Game/omokPlay.jsp";
-		            } else {
+		            } else if(msg == "F") {
 		              alert("방 생성에 실패했습니다 ㅠㅠ");
 		            }
+					else if(msg == "A"){
+						alert("이미 방에 접속되어있는 아이디입니다.");
+					}
 		          }
 			});
 		});

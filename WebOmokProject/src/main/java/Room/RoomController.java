@@ -63,16 +63,32 @@ public class RoomController extends HttpServlet {
 			}else {
 				roomVO.setRoom_pw(pw);
 			}
-			Boolean res= false;
+			//1. 이미 다른 방에 들어갔는지 확인
+			boolean temp = false;
 			try {
-				roomDAO.addRoom(roomVO);
-				res= true;
+				temp = roomDAO.RoomCheck(owner_id);
 			}
 			catch(Exception e) {
-				res=false;
+				temp = false;
 			}
-			writer.print(res==true?"T":"F");
+			if(!temp) {
+				writer.print("A");
+			}
+			else {
+				try {
+					roomDAO.addRoom(roomVO);
+					//룸 넘버를 받아와서 저장
+					int roomno = roomDAO.getRoomIdWhatIOwned(owner_id);
+					HttpSession session = request.getSession();
+					session.setAttribute("roomid", roomno);
+					writer.print("T");
+				}
+				catch(Exception e) {
+					writer.print("F");
+				}
+			}
 			System.out.println("==========room add=============");
+			return;
 		}
 		//delRoom: 방 삭제 이후 방 생성 화면으로 이동 (nextPage = listRoom) 
 		else if("/delRoom.do".equals(action)) {
@@ -107,7 +123,8 @@ public class RoomController extends HttpServlet {
 		}
 		else if("/playerExited.do".equals(action)){
 			int Exited_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
-			System.out.println("==========playerExited=============");	
+			System.out.println("==========playerExited=============");
+			request.getSession().removeAttribute("roomid");
 			System.out.println("==========playerExited=============");	
 		}
 		else if("/roomList.do".equals(action)) {

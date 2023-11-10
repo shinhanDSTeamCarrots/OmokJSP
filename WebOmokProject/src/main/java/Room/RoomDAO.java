@@ -90,7 +90,51 @@ public class RoomDAO {
 		}
 		return res;
 	}
+	public boolean RoomCheck(int player_no) {
+		boolean result = false;
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT COUNT(*) AS CNT FROM ROOM_TB\r\n"
+						 + " WHERE (OWNER_NO = ? OR JOINED_NO = ?) ";
+			pstmt = con.prepareStatement(query);
 
+			pstmt.setInt(1, player_no);
+			pstmt.setInt(2, player_no);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next(); // 결과 행이 하나 이상 있는 경우, 첫 번째 행으로 이동
+
+			if (rs.getInt("cnt") > 0) { // rs의 열 값이 0보다 크다면
+				result = false;
+			} else {
+				result = true;
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int getRoomIdWhatIOwned(int player_no) {
+		int result = -1;
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT ROOM_ID FROM ROOM_TB\r\n"
+						 + " WHERE OWNER_NO = ? ";
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(1, player_no);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next(); // 결과 행이 하나 이상 있는 경우, 첫 번째 행으로 이동
+			result = rs.getInt("ROOM_ID");
+			pstmt.close();
+		} catch (Exception e) {
+			result = -1;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public void addRoom(RoomVO r) {
 		try {
 			con = dataFactory.getConnection();
