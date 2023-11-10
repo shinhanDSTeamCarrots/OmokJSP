@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../css/omokRegisterStyle.css">
 <script type="text/javascript">
+	let isDuplCheck = false; //중복확인 버튼 확인 체크 여부 변수
+	
 	function check() {
 		let id = document.getElementById('id');
 		let pwd = document.getElementById('pwd');
@@ -33,6 +35,9 @@
 			return;
 		} else if (name.value.trim() == "") {
 			alert("이름을 입력해 주세요.");
+			return;
+		} else if (!isDuplCheck){
+			alert("아이디 중복 확인해 주세요.");
 			return;
 		}
 		console.log("회원가입 통신 시작");
@@ -78,6 +83,7 @@
 				if (msg == "T") {
 					divStyle = "color: #FAF8ED;";
 					$(".confirm").text("사용 가능");
+					isDuplicateChecked = true;
 				} else {
 					divStyle = "color: red;";
 					$(".confirm").text("사용 불가");
