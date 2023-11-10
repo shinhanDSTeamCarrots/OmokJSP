@@ -1,25 +1,18 @@
 /*유저 정보 요청 및 좌표 전달 */
 
 //유저 정보 요청
-function requUserInfo(content){
+function requUserInfo(){
 	$.ajax({
 		type: "post",
 		async: "false", //동기 방식으로 동작
 		url:"/WebOmokProject/omok/requUserInfo.do", //전달할 주소
 		dataType:"json", //전달할 데이터 타입
 		data:{ //전달할 데이터
-			member_id : content
+			my_id : myId,
+			opp_id: opponentId
 		},
-		success: function(arr){ //유저id, 승리, 패배, 승률
-			//arr : 미정, winCnt, loseCnt, winRate
-			$(arr).each(function(index, item){ //jQuery반복
-				console.log(this); //item
-				//load아니면 append사용
-				$("#").load("Game/omokPlay.jsp p");
-				$("#winCnt").load("Game/omokPlay.jsp p");
-				$("#loseCnt").load("Game/omokPlay.jsp p");
-				$("#winRate").load("Game/omokPlay.jsp p");
-			})
+		success: function(msg){ //유저id, 승리, 패배, 승률
+			//유저 id 값 받아서 리턴
 		},
 		error:function(){
 			alert("유저 정보 요청 실패");
@@ -28,26 +21,28 @@ function requUserInfo(content){
 }
 
 //내가 둔 돌 좌표 전달
-function sendMyInfo(){
+function sendMyInfo(x, y){
 	$.ajax({
 		type: "post",
 		async: "false", 
 		url:"/WebOmokProject/omok/sendMyInfo.do",
-		dataType:"json",
+		dataType:"",
 		data:{
 			x_row: x,
 			y_col: y,
-			stone: stone
+			stone: mystone
 		},
 		success: function (success){
+			
+			var jsonInfo = JSON.parse(success);
 			console.log(success);
 			
 			if(success){
 				if(message == "T"){
-					stone(x, y, "black");
+					stone(x, y, mystone);
 				}
 				if(message == "W"){
-					stone(x, y, "black");
+					stone(x, y, mystone);
 					alert("승리");
 				}		
 			} else if(success == "false"){
@@ -69,7 +64,7 @@ function sendMyInfo(){
 }
 
 //상대 둔 돌 좌표 전달 >>>서버 통신 받으면 바로 이미지 출력
-function sendYouInfo(){
+function sendYouInfo(x,y){
 	$.ajax({
 		type: "post",
 		async: "true", 
@@ -78,7 +73,10 @@ function sendYouInfo(){
 		data:{
 			x_row: x,
 			y_col: y,
-			stone: stone
+			stone: oppstone
+		},
+		success: function(){
+			isPlay = true;
 		}
 	})
 }

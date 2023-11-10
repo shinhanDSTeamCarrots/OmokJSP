@@ -115,6 +115,26 @@ public class RoomDAO {
 		}
 		return result;
 	}
+	public int getRoomIdWhatIOwned(int player_no) {
+		int result = -1;
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT ROOM_ID FROM ROOM_TB\r\n"
+						 + " WHERE OWNER_NO = ? ";
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(1, player_no);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next(); // 결과 행이 하나 이상 있는 경우, 첫 번째 행으로 이동
+			result = rs.getInt("ROOM_ID");
+			pstmt.close();
+		} catch (Exception e) {
+			result = -1;
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public void addRoom(RoomVO r) {
 		try {
 			con = dataFactory.getConnection();

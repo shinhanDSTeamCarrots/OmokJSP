@@ -33,7 +33,7 @@ public class MySocket {
 		int roomId = -1;
 		try {
 			JSONObject jsonObject = new JSONObject(message);
-			roomId = Integer.parseInt((String) jsonObject.get("roomId"));
+			roomId = jsonObject.getInt("roomId");
 		}
 		catch(Exception e){
 			System.out.println("메시지 json 오류 ");

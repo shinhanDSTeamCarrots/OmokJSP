@@ -78,7 +78,9 @@ public class RoomController extends HttpServlet {
 				try {
 					roomDAO.addRoom(roomVO);
 					//룸 넘버를 받아와서 저장
+					int roomno = roomDAO.getRoomIdWhatIOwned(owner_id);
 					HttpSession session = request.getSession();
+					session.setAttribute("roomid", roomno);
 					writer.print("T");
 				}
 				catch(Exception e) {
@@ -121,7 +123,8 @@ public class RoomController extends HttpServlet {
 		}
 		else if("/playerExited.do".equals(action)){
 			int Exited_NO = Integer.parseInt(request.getParameter("JOINED_NO"));
-			System.out.println("==========playerExited=============");	
+			System.out.println("==========playerExited=============");
+			request.getSession().removeAttribute("roomid");
 			System.out.println("==========playerExited=============");	
 		}
 		else if("/roomList.do".equals(action)) {

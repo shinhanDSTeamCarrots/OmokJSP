@@ -40,8 +40,7 @@ public class RankDAO {
 	public void addLog(LogVO addVo) {
 		try {
 			con=dataFactory.getConnection();
-			String query= "INSERT INTO LOG_TB(log_id, winner_no, loser_no, log_date)"
-					+"VALUES (LOG_SEQ.NEXTVAL, ?, ?, TO_DATE(SYSDATE,'MM-DD-YYYY HH24:MI:SS')";
+			String query= "INSERT INTO LOG_TB(log_id, winner_no, loser_no, log_date) VALUES (LOG_SEQ.NEXTVAL, ?, ?, sysdate)";
 			pstmt=con.prepareStatement(query);
 			pstmt.setInt(1, addVo.getWinner_no());
 			pstmt.setInt(2, addVo.getLoser_no());
@@ -104,70 +103,70 @@ public class RankDAO {
 //}
 //	
 		
-//	// 승률계산 memberno별 memberid, wincnt, losecnt, winrate 
-//	// 0 - member_id
-//	// 1 - win_cnt
-//	// 2 - lose_cnt
-//	// 3- win_rate
-//	public Map<Integer, Object> winRate(int member_no) {
-//		Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        
-//        Map<Integer, Object> result = new HashMap<>();
-//        
-//		try {
-//			con=dataFactory.getConnection();
-//			
-//			String query = "SELECT MEMBER_ID FROM MEMBER_TB WHERE MEMBER_NO = ?";
-//			pstmt=con.prepareStatement(query);
-//			pstmt.setInt(1, member_no);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			String memberId=rs.getString("MEMBER_ID");
-//			result.put(0, memberId);
-//			
-//			String winquery="SELECT COUNT(WINNER_NO) AS WIN_CNT FROM LOG_TB WHERE WINNER_NO=?";
-//			pstmt=con.prepareStatement(winquery);		
-//			pstmt.setInt(1, member_no);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			int winCnt=rs.getInt("WIN_CNT");
-//			result.put(1, winCnt);
-//			
-//			String losequery="SELECT COUNT(LOSER_NO) AS LOSE_CNT FROM LOG_TB WHERE LOSER_NO=?";
-//			pstmt=con.prepareStatement(losequery);		
-//			pstmt.setInt(1, member_no);
-//			rs=pstmt.executeQuery();
-//			rs.next();
-//			int loseCnt=rs.getInt("LOSE_CNT");
-//			result.put(2, loseCnt);
-//			
-//			double winRate=0.0;
-//			if(winCnt + loseCnt > 0) {
-//				winRate = (double)winCnt / (winCnt + loseCnt) * 100.0;
-//			}
-//			result.put(3, winRate);
-//			
-//		}catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//                if (conn != null) {
-//                    conn.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//		}		
-//		return result;
-//	}
+	// 승률계산 memberno별 memberid, wincnt, losecnt, winrate 
+	// 0 - member_id
+	// 1 - win_cnt
+	// 2 - lose_cnt
+	// 3- win_rate
+	public Map<Integer, Object> winRate(int member_no) {
+		Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        Map<Integer, Object> result = new HashMap<>();
+        
+		try {
+			con=dataFactory.getConnection();
+			
+			String query = "SELECT NVL(MEMBER_NICKNM,MEMBER_NM) AS NAME FROM MEMBER_TB WHERE MEMBER_NO = ?";
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, member_no);
+			rs=pstmt.executeQuery();
+			rs.next();
+			String NAME=rs.getString("NAME");
+			result.put(0, NAME);
+			
+			String winquery="SELECT COUNT(WINNER_NO) AS WIN_CNT FROM LOG_TB WHERE WINNER_NO=?";
+			pstmt=con.prepareStatement(winquery);		
+			pstmt.setInt(1, member_no);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int winCnt=rs.getInt("WIN_CNT");
+			result.put(1, winCnt);
+			
+			String losequery="SELECT COUNT(LOSER_NO) AS LOSE_CNT FROM LOG_TB WHERE LOSER_NO=?";
+			pstmt=con.prepareStatement(losequery);		
+			pstmt.setInt(1, member_no);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int loseCnt=rs.getInt("LOSE_CNT");
+			result.put(2, loseCnt);
+			
+			double winRate=0.0;
+			if(winCnt + loseCnt > 0) {
+				winRate = ((double)winCnt / (winCnt + loseCnt)) * 100.0;
+			}
+			result.put(3, winRate);
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+		}		
+		return result;
+	}
 //	
 //	public List<Map<Integer, Object>> getAllWinRates(List<Integer> memberNos){
 //		List<Map<Integer, Object>> allWinRates =new ArrayList<>();
