@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,21 +11,23 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	function whenLoginClick() {
+	
+		
 		console.log("로그인 시도");
 		let id = document.getElementById("loginId");
 		let pwd = document.getElementById("loginPw");
 		if (id.value.trim() == "") {
 			console.log("아이디 입력 오류");
-			alert("id를 입력해 주세요!");
+			alert("id를 입력해 주세요!");			
 			return;
 		} else if (pwd.value.trim() == "") {
 			console.log("패스워드 입력 오류");
-			alert("패스워드를 입력해 주세요!");
+			alert("패스워드를 입력해 주세요!");			
 			return;
 		}
 		console.log("ajax 시작");
 		console.log("context: " + "${contextPath}");
+		
 		$.ajax({
 			url : "${contextPath}/member/loginMember.do",
 			type : "POST",
@@ -43,13 +45,14 @@
 				} else {
 					alert("로그인에 실패했습니다 ㅠㅠ");
 				}
-			}
-		});
-	}
+			}			
+		});	
+}
 
 	function whenRegistClicked() {
 		window.self.location = "${contextPath}/Main/omokRegister.jsp";
-	}
+	}	
+}
 </script>
 </head>
 <body>
