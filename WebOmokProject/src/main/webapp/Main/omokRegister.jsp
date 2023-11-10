@@ -83,7 +83,7 @@
 				if (msg == "T") {
 					divStyle = "color: #FAF8ED;";
 					$(".confirm").text("사용 가능");
-					isDuplicateChecked = true;
+					isDuplCheck = true;
 				} else {
 					divStyle = "color: red;";
 					$(".confirm").text("사용 불가");
