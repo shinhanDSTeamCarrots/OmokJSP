@@ -92,6 +92,7 @@ public class MemberController extends HttpServlet {
 			else {
 				HttpSession session = request.getSession();
 				session.setAttribute("myvo", logined);
+				session.setAttribute("memberno", logined.getMember_no());
 				writer.print("T");
 				//로그인 성공
 			}

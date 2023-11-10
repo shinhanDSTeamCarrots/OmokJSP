@@ -1,33 +1,134 @@
 @charset "UTF-8";
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #BA94D1;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: url('../img/carrot.jpg');
+	font-family: Arial, sans-serif;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: url('../img/carrot.jpg');
 }
 
 .container {
-    text-align: center;
-    border-radius: 5vw;
-    padding: 5vw;
-    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
-    height: 60vh;
-    width: 40vw;
-    background-color: #F9B572;
-    margin: auto;
+	text-align: center;
+	border-radius: 5vw;
+	padding: 5vw;
+	box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
+	height: 60vh;
+	width: 40vw;
+	background-color: #F9B572;
+	margin: auto;
 }
 
-.form {
-    width: 20vw;
-    height: 50vh;
-    margin: auto;
-    box-sizing: border-box;
-    text-align: center;
+.content {
     display: flex;
     justify-content: center;
+    margin: 8vh auto;
+}
+
+.l-content {
+    width: 75%;
+    background-color: #FAF8ED;
+    border-radius: 1vw;
+    border: 1px solid #ccc;
+    padding: 1vw;
+    float: left;
+    box-sizing: border-box;
+}
+
+.r-content {
+    width: 25%;
+    float: right;
+    box-sizing: border-box;
+    flex-direction: column;
     align-items: center;
+}
+
+h2 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.input-group {
+	margin-left: 15px;
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #99B080;
+}
+
+.input-content {
+	display: flex;
+	align-items: center;
+	margin-left: 50px;
+}
+
+.input-content input {
+	width: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.bearImg {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	width: 30%;
+	flex-direction: column;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.bearImg div {
+	margin-right: 5px;
+	width: 200px;
+	height: auto;
+	font-weight: bold;
+	font-size: 25px;
+	color: #F9B572;
+}
+
+
+.bearImg img {
+	margin-right: 5px;
+	width: 200px;
+	height: auto;
+}
+
+.btn {
+	width: auto;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background: #99B080;
+	color: white;
+	cursor: pointer;
+}
+
+.btn:hover {
+    background: #748E63;
+}
+
+.sign-button{
+	width: auto;
 }
