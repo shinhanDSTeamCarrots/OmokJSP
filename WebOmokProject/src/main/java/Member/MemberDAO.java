@@ -44,6 +44,7 @@ public class MemberDAO {
 			}
 			pstmt.close();
 		} catch (Exception e) {
+			result = false;
 			e.printStackTrace();
 		}
 		return result;
@@ -51,23 +52,19 @@ public class MemberDAO {
 
 	// 사용자 추가
 	public void addMember(MemberVO memberVO) {
-//		// 비밀번호 암호화
-//		String _pwd = memberVO.getMember_pw();
-//		MessageDigest md = MessageDigest.getInstance("SHA-256");
-//		md.update(_pwd.getBytes());
-//		String hex = String.format("%064x", new BigInteger(1, md.digest()));
-
+		
 		try {
 			con = dataFactory.getConnection();
-			String query = "INSERT INTO MEMBER_TB (member_no,member_id,hex,member_nm,email) VALUES(?,?,?,?,?)";
+			String query = "INSERT INTO MEMBER_TB (MEMBER_NO,MEMBER_ID,MEMBER_PW,MEMBER_NM,MEMBER_NICKNM,EMAIL) VALUES (MEMBER_SEQ.NEXTVAL,?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setInt(1,memberVO.getMember_no()); //변경해야함!!
-			pstmt.setString(2, memberVO.getMember_id());
-			pstmt.setString(3, memberVO.getMember_pw());
+			pstmt.setString(1, memberVO.getMember_id());
+			pstmt.setString(2, memberVO.getMember_pw());
+			pstmt.setString(3, memberVO.getMember_nm());
 			pstmt.setString(4, memberVO.getMember_nicknm());
-			pstmt.setString(6, memberVO.getEmail());
-
+			pstmt.setString(5, memberVO.getEmail());
+			System.out.println("query\n"+pstmt.toString());
+			
 			pstmt.executeUpdate(); // 데이터베이스에 해당 SQL 쿼리가 실행
 			pstmt.close();
 			con.close();
@@ -80,12 +77,6 @@ public class MemberDAO {
 	public MemberVO isExisted(MemberVO memberVO) {
 		MemberVO result = null;
 
-//		// 비밀번호 암호화
-//		String _pwd = memberVO.getMember_pw();
-//		MessageDigest md = MessageDigest.getInstance("SHA-256");
-//		md.update(_pwd.getBytes());
-//		String hex = String.format("%064x", new BigInteger(1, md.digest()));
-
 		try {
 			con = dataFactory.getConnection();
 			String query = "SELECT * FROM MEMBER_TB WHERE member_id=? AND member_pw=?";
@@ -93,17 +84,25 @@ public class MemberDAO {
 
 			pstmt.setString(1, memberVO.getMember_id());
 			pstmt.setString(2, memberVO.getMember_pw());
-			ResultSet rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				result = new MemberVO();
-				result.setMember_no(rs.getInt("member_no"));
-				result.setMember_id(rs.getString("member_id"));
-				result.setMember_nm(rs.getString("member_nm"));
-				result.setJoin_date(rs.getDate("join_date"));
-				result.setEmail(rs.getString("email"));
+			try {
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					result = new MemberVO();
+					result.setMember_no(rs.getInt("member_no"));
+					result.setMember_id(rs.getString("member_id"));
+					result.setMember_nm(rs.getString("member_nm"));
+					result.setJoin_date(rs.getDate("join_date"));
+					result.setEmail(rs.getString("email"));
+				}
+				else {
+					result = null;
+				}
+				pstmt.close();
+				return result;
+			}catch(Exception e) {
+				return null;
 			}
-			pstmt.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

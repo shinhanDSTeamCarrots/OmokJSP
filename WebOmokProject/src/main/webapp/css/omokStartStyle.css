@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #BA94D1;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: url('../img/carrot.jpg');
+}
+
+.container {
+	text-align: center;
+	border-radius: 5vw;
+	padding: 5vw;
+	box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
+	height: 60vh;
+	width: 40vw;
+	background-color: #F9B572;
+	margin: auto;
+}
+
+.image {
+	width: 80px;
+	height: auto;
+	margin: 10px;
+}
+
+.login-container {
+	padding: 5px;
+	height: 30vh;
+	width: 35vw;
+	margin: 10vh auto;
+	border-radius: 5vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #FAF8ED;
+}
+
+.input-group {
+	margin-bottom: 15px;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.input-group input {
+	width: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.input-group input:focus {
+	outline: none;
+	border-color: #99B080;
+}
+
+.btn {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background: #99B080;
+	color: white;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: #748E63;
+}
+
+.login-footer {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.login-footer a {
+	color: #99B080;
+	text-decoration: none;
+}

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>오목 게임</title>
-<link rel="stylesheet" type="text/css" href="../Game/CSS/omokPlayStyle.css">
+	<meta charset="UTF-8">
+	<title>오목 게임</title>
+	<link rel="stylesheet" type="text/css" href="../css/omokPlayStyle.css">
 </head>
 <body>
     <div class="game_container">
@@ -14,9 +14,9 @@
 	            <h2>플레이어 1</h2>
 	            <p>흑돌</p>
 	            <div class="score_box">
-	                <p>승리: 0</p>
-	                <p>패배: 0</p>
-	                <p>승률: 0</p>
+	                <p id="winCnt">승리: 0</p>
+	                <p id="loseCnt">패배: 0</p>
+	                <p id="winRate">승률: 0</p>
 	            </div>
 	        </div>
 	    </div>
@@ -28,9 +28,9 @@
 	            <h2>플레이어 2</h2>
 	            <p>백돌</p>
 	            <div class="score_box">
-	                <p>승리: 0</p>
-	                <p>패배: 0</p>
-	                <p>승률: 0</p>
+	                <p id="winCnt">승리: 0</p>
+	                <p id="loseCnt">패배: 0</p>
+	                <p id="winRate">승률: 0</p>
 	            </div>
 	        </div>
 	        <div class="exitBtn">
@@ -39,7 +39,8 @@
         </div>
     </div>
     <script src="js/omokPlayEvent.js"></script>
+    <script src="js/SocketControll.js"></script>
     <script src="js/requSendFunction.js"></script>
-    <script src="SocketControll.js"></script>
+    <script src="js/socketCallBack.js"></script>
 </body>
 </html>
