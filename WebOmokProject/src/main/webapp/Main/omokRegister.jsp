@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../css/omokRegisterStyle.css">
 <script type="text/javascript">
+	let isDuplCheck = false; //중복확인 버튼 확인 체크 여부 변수
+	
 	function check() {
 		let id = document.getElementById('id');
 		let pwd = document.getElementById('pwd');
@@ -33,6 +35,9 @@
 			return;
 		} else if (name.value.trim() == "") {
 			alert("이름을 입력해 주세요.");
+			return;
+		} else if (!isDuplCheck){
+			alert("아이디 중복 확인해 주세요.");
 			return;
 		}
 		console.log("회원가입 통신 시작");
@@ -74,11 +79,16 @@
 			},
 			success : function(msg) {
 				console.log("중복확인 체크 성공");
+				var divStyle;
 				if (msg == "T") {
-					alert("사용할 수 있는 아이디입니다.");
+					divStyle = "color: #FAF8ED;";
+					$(".confirm").text("사용 가능");
+					isDuplicateChecked = true;
 				} else {
-					alert("사용할 수 없는 아이디입니다.");
+					divStyle = "color: red;";
+					$(".confirm").text("사용 불가");
 				}
+				$(".confirm").attr("style", divStyle);
 			}
 		});
 	}
@@ -87,32 +97,41 @@
 <body>
 	<div class="container">
 		<div class="content">
-			<form method="post">
-				<h2>회원가입</h2>
-				<div class="input-group">
-				    <label for="id">아이디
-					    <input type="text" name="signId" id="id" placeholder="아이디">
-					    <input type="button" id="btn_duplicate" value="중복확인" onClick="idCheck()" />
-				    </label>
-				    <label for="pwd">비밀번호
-				    	<input type="password" name="signPw" id="pwd" placeholder="비밀번호">
-					</label>
-				    <label for="checkPwd">비밀번호 확인
-				    	<input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인">
-					</label>
-				    <label for="name">이름
-				    	<input type="text" name="signName" id="name" placeholder="이름">
-					</label>
-				    <label for="nicknm">닉네임
-				    	<input type="text" name="nicknm" id="nicknm" placeholder="닉네임">
-					</label>
-				    <label for="email">이메일
-				    	<input type="email" name="signEmail" id="email" placeholder="이메일">
-				    </label>
-				    <input type="button" value="가입하기" onClick="check()">
-				</div>
-			</form>
 			<div class="bearImg">
+				<div class="confirm">안녕안녕</div>
+				<img src = "../img/bear.png">
+			</div>
+			<div class="l-content">
+				<form method="post">
+					<h2>회원가입</h2>
+					<div class="input-group">
+						<div class="input-content">
+						    <input type="text" name="signId" id="id" placeholder="아이디">
+						    <input type="button" id="btn_duplicate" class="btn" value="중복확인" onClick="idCheck()">
+					    </div>
+				    	<div class="input-content">
+				    		<input type="password" name="signPw" id="pwd" placeholder="비밀번호">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="text" name="signName" id="name" placeholder="이름">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="text" name="nicknm" id="nicknm" placeholder="닉네임">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="email" name="signEmail" id="email" placeholder="이메일">
+				    	</div>
+					</div>
+					<div>
+						<input type="button" class="btn" value="가입하기" onClick="check()">
+					</div>
+				</form>
+			</div>
+			<div class="bearImg">
+				<div class="confirm">안녕안녕</div>
 				<img src = "../img/bear.png">
 			</div>
 		</div>

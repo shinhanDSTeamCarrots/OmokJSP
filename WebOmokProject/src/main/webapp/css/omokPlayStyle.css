@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #FAF8ED;
 }
 .game_container {
     display: flex;
@@ -34,7 +34,7 @@ body {
 }
 .player_info1 {
     border: 1px solid #000;
-    background-color: burlywood;
+    background-color: #F9B572;
     margin-right: 60px;
     border-radius: 10px;
     box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.3);
@@ -46,7 +46,7 @@ body {
 }
 .player_info2 {
     border: 1px solid #000;
-    background-color: burlywood;
+    background-color: #F9B572;
     margin-left: 60px;
     border-radius: 10px;
     box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.3);
@@ -56,9 +56,10 @@ body {
 }
 .score_box {
     border: 1px solid #000;
-    background-color: #eee;
+    background-color: #FAF8ED;
     margin: 10px;
     padding: 10px;
+    border-radius: 10px;
 }
 .exitBtn {
 	margin-left: 60px;
@@ -68,14 +69,17 @@ body {
 }
 .exitBtn > button {
 	border: 1px solid #000;
-	background-color:  burlywood;
+	background-color: #99B080;
 	box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.3);
 	margin: 5px 5px;
 	border-radius: 50%;
 	height: 50px;
     width: 50px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 30px;
+    color: white; 
 }
 .exitBtn > button:hover {
-    background-color: #DEBACE;
-}
+    background-color: #748E63;
+    }
