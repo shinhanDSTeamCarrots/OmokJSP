@@ -24,15 +24,9 @@
 		if (id.value.trim() == "") {
 			alert("아이디를 입력해 주세요.");
 			return;
-		} else if (id.length < 6 || id.length > 20) {
-	        alert("아이디는 6-20자 사이로 입력해주세요.");
-	      	return; 
 		} else if (pwd.value.trim() == "") {
 			alert("비밀번호를 입력해 주세요.");
 			return;
-		} else if (pwd.length < 6 || pwd.length > 20)) {
-	        alert("비밀번호는 6-20자 사이로 입력해주세요.");
-	        return;
 		} else if (pwd.value != checkPwd.value) {
 			alert("비밀번호가 일치하지 않습니다.");
 			return;
@@ -93,7 +87,6 @@
 				} else {
 					divStyle = "color: red;";
 					$(".confirm").text("사용 불가");
-					isDuplicateChecked = true;
 				}
 				$(".confirm").attr("style", divStyle);
 			}
