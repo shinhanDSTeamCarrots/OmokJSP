@@ -74,11 +74,15 @@
 			},
 			success : function(msg) {
 				console.log("중복확인 체크 성공");
+				var divStyle;
 				if (msg == "T") {
-					alert("사용할 수 있는 아이디입니다.");
+					divStyle = "color: #FAF8ED;";
+					$(".confirm").text("사용 가능");
 				} else {
-					alert("사용할 수 없는 아이디입니다.");
+					divStyle = "color: red;";
+					$(".confirm").text("사용 불가");
 				}
+				$(".confirm").attr("style", divStyle);
 			}
 		});
 	}
@@ -87,25 +91,41 @@
 <body>
 	<div class="container">
 		<div class="content">
-			<form method="post">
-				<h2>회원가입</h2>
-				<div class="input-group">
-					<div class="input-content">
-					    <input type="text" name="signId" id="id" placeholder="아이디">
-					    <input type="button" id="btn_duplicate" class="btn" value="중복확인" onClick="idCheck()">
-				    </div>
-			    	<div class="input-content"><input type="password" name="signPw" id="pwd" placeholder="비밀번호"></div>
-			    	<div class="input-content"><input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인"></div>
-
-			    	<div class="input-content"><input type="text" name="signName" id="name" placeholder="이름"></div>
-
-			    	<div class="input-content"><input type="text" name="nicknm" id="nicknm" placeholder="닉네임"></div>
-
-			    	<div class="input-content"><input type="email" name="signEmail" id="email" placeholder="이메일"></div>
-				</div>
-				<div><input type="button" class="btn" value="가입하기" onClick="check()"></div>
-			</form>
 			<div class="bearImg">
+				<div class="confirm">안녕안녕</div>
+				<img src = "../img/bear.png">
+			</div>
+			<div class="l-content">
+				<form method="post">
+					<h2>회원가입</h2>
+					<div class="input-group">
+						<div class="input-content">
+						    <input type="text" name="signId" id="id" placeholder="아이디">
+						    <input type="button" id="btn_duplicate" class="btn" value="중복확인" onClick="idCheck()">
+					    </div>
+				    	<div class="input-content">
+				    		<input type="password" name="signPw" id="pwd" placeholder="비밀번호">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호 확인">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="text" name="signName" id="name" placeholder="이름">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="text" name="nicknm" id="nicknm" placeholder="닉네임">
+				    	</div>
+				    	<div class="input-content">
+				    		<input type="email" name="signEmail" id="email" placeholder="이메일">
+				    	</div>
+					</div>
+					<div>
+						<input type="button" class="btn" value="가입하기" onClick="check()">
+					</div>
+				</form>
+			</div>
+			<div class="bearImg">
+				<div class="confirm">안녕안녕</div>
 				<img src = "../img/bear.png">
 			</div>
 		</div>
